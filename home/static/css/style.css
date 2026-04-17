@@ -1,0 +1,57 @@
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)),
+                url('/static/images/karachi-night.jpg') center/cover no-repeat fixed;
+    height: 100vh;
+    color: white;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+}
+
+.red-btn {
+    background-color: #e30613;
+    color: white;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 180px;
+    text-align: center;
+}
+
+.red-btn:hover {
+    background-color: #c0040f;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(227, 6, 19, 0.4);
+}
+
+.action-box {
+    background: rgba(255, 255, 255, 0.95);
+    color: #222;
+    padding: 22px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.action-box:hover {
+    transform: translateY(-3px);
+}
+.sidebar-red h2 { 
+    font-weight: 700; 
+    font-size: 1.6rem;   /* Reduced from 2.5rem */
+    line-height: 1.2;    /* Slightly increased for a single line */
+    white-space: nowrap; /* Forces the text to stay on one line */
+}

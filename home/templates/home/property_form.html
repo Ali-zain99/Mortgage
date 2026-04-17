@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa Mortgage - Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            background-color: #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 2rem 1rem;
+        }
+
+        /* ── Outer card ── */
+        .mortgage-card {
+            display: flex;
+            width: 100%;
+            max-width: 780px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+            background: #fff;
+        }
+
+        /* ── Left red sidebar ── */
+        .sidebar {
+            width: 220px;
+            flex-shrink: 0;
+            background: #e30613;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 28px 24px 36px;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .sidebar-logo img {
+            width: 48px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .sidebar-logo span {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .sidebar-title {
+            color: #fff;
+            font-size: 2.1rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            margin: auto 0;  /* this pushes it to the vertical center */
+        }
+
+        /* ── Right form section ── */
+        .form-section {
+            flex: 1;
+            padding: 32px 36px 36px;
+            background: #fff;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #555;
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin-bottom: 6px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #e30613; }
+        .back-link svg { width: 16px; height: 16px; }
+
+        .form-section h4 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-control,
+        .form-select {
+            border: 1.5px solid #dde0e6;
+            border-radius: 6px;
+            padding: 9px 13px;
+            font-size: 0.88rem;
+            color: #333;
+            background: #fafafa;
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: auto;
+        }
+
+        .form-control::placeholder { color: #bbb; }
+
+        .form-control:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #e30613;
+            box-shadow: 0 0 0 3px rgba(227,6,19,0.1);
+            background: #fff;
+        }
+
+        .mb-field { margin-bottom: 14px; }
+
+        /* ── Consent checkbox ── */
+        .consent-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 18px 0 24px;
+        }
+
+        .consent-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #e30613;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .consent-row label {
+            font-size: 0.82rem;
+            color: #444;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        /* ── Submit button ── */
+        .btn-submit {
+            display: block;
+            width: 65%;
+            margin: 0 auto;
+            background: #e30613;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 11px;
+            font-size: 0.98rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-submit:hover { background: #c20511; }
+        .btn-submit:active { transform: scale(0.98); }
+
+        /* ── Success Modal ── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 14px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            max-width: 360px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .modal-box .icon {
+            width: 56px;
+            height: 56px;
+            background: #fff0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .modal-box h5 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #111;
+        }
+
+        .modal-box .number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #e30613;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .modal-box .btn-close-modal {
+            background: #e30613;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 40px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+
+        .modal-box .btn-close-modal:hover { background: #c20511; }
+
+        /* Responsive */
+        @media (max-width: 580px) {
+            .sidebar { display: none; }
+            .form-section { padding: 28px 20px; }
+            .btn-submit { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="mortgage-card">
+
+    <!-- Left Red Sidebar -->
+    {% comment %} <div class="sidebar">
+        <div class="sidebar-logo">
+            <img src="{% static 'images/logo.png' %}" alt="Bank Alfalah Logo">
+            <span>Bank Alfalah</span>
+        </div>
+        <div class="sidebar-title">Alfa<br>Mortgage</div>
+    </div> {% endcomment %}
+    <div class="sidebar">
+    <div class="sidebar-logo">
+        <img src="{% static 'images/logo.png' %}" alt="Bank Alfalah Logo">
+    </div>
+
+    <div class="sidebar-title">Alfa<br>Mortgage</div>
+</div>
+
+
+    <!-- Right Form -->
+    <div class="form-section">
+        <a href="{% url 'browse_properties' %}" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
+        </a>
+        <h4>Details</h4>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-field">
+                <label class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" placeholder="xxx" required>
+            </div>
+
+            <div class="mb-field">
+                <label class="form-label">City</label>
+                <select name="city" class="form-select form-control" required>
+                    <option value="Karachi">Karachi</option>
+                    <option value="Lahore">Lahore</option>
+                    <option value="Islamabad">Islamabad</option>
+                </select>
+            </div>
+
+            <div class="mb-field">
+                <label class="form-label">Contact No</label>
+                <input type="text" name="contact" class="form-control" placeholder="0000 0000000" required>
+            </div>
+
+            <div class="mb-field">
+                <label class="form-label">CNIC</label>
+                <input type="text" name="cnic" class="form-control" placeholder="00000 0000000 0" required>
+            </div>
+
+            <div class="consent-row">
+                <input type="checkbox" id="consent" required>
+                <label for="consent">I consent to share my information with the seller</label>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Success Modal -->
+{% if show_modal %}
+<div class="modal-overlay">
+    <div class="modal-box">
+        <div class="icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e30613" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+        </div>
+        <h5>Seller Contact</h5>
+        <p style="color:#666; font-size:0.85rem;">Reach out to the seller directly</p>
+        <div class="number">{{ seller_number }}</div>
+        <a href="/" class="btn-close-modal">Close</a>
+    </div>
+</div>
+{% endif %}
+
+</body>
+</html>
