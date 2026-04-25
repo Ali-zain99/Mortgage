@@ -55,3 +55,19 @@
     line-height: 1.2;    /* Slightly increased for a single line */
     white-space: nowrap; /* Forces the text to stay on one line */
 }
+.property-card .row {
+    min-height: 280px;
+}
+
+.property-card img {
+    transition: transform 0.3s ease;
+}
+
+.property-card a:hover img {
+    transform: scale(1.05);
+}
+
+.property-card .card-body {
+    display: flex;
+    flex-direction: column;
+}

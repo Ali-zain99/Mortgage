@@ -1,6 +1,9 @@
 from django.contrib import admin
-from .models import UserProfile
 
+from .models import UserProfile
+from .models import Property
+
+admin.site.register(Property)
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     # This determines which columns show up in the list view

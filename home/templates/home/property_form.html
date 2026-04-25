@@ -7,7 +7,11 @@
     <title>Alfa Mortgage - Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
 
         body {
             min-height: 100vh;
@@ -19,7 +23,7 @@
             padding: 2rem 1rem;
         }
 
-        /* ── Outer card ── */
+        /* Outer Card */
         .mortgage-card {
             display: flex;
             width: 100%;
@@ -30,7 +34,7 @@
             background: #fff;
         }
 
-        /* ── Left red sidebar ── */
+        /* Left Red Sidebar */
         .sidebar {
             width: 220px;
             flex-shrink: 0;
@@ -54,24 +58,16 @@
             filter: brightness(0) invert(1);
         }
 
-        .sidebar-logo span {
-            color: rgba(255,255,255,0.75);
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
         .sidebar-title {
             color: #fff;
             font-size: 2.1rem;
             font-weight: 800;
             line-height: 1.15;
             letter-spacing: -0.5px;
-            margin: auto 0;  /* this pushes it to the vertical center */
+            margin-top: 12px;
         }
 
-        /* ── Right form section ── */
+        /* Right Form Section */
         .form-section {
             flex: 1;
             padding: 32px 36px 36px;
@@ -117,7 +113,6 @@
             background: #fafafa;
             width: 100%;
             transition: border-color 0.2s, box-shadow 0.2s;
-            appearance: auto;
         }
 
         .form-control::placeholder { color: #bbb; }
@@ -132,7 +127,7 @@
 
         .mb-field { margin-bottom: 14px; }
 
-        /* ── Consent checkbox ── */
+        /* Consent Checkbox */
         .consent-row {
             display: flex;
             align-items: center;
@@ -155,7 +150,7 @@
             line-height: 1.4;
         }
 
-        /* ── Submit button ── */
+        /* Submit Button */
         .btn-submit {
             display: block;
             width: 65%;
@@ -175,96 +170,145 @@
         .btn-submit:hover { background: #c20511; }
         .btn-submit:active { transform: scale(0.98); }
 
-        /* ── Success Modal ── */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-        }
-
-        .modal-box {
+        /* ==================== SUCCESS PAGE STYLES ==================== */
+        .success-content {
+            flex: 1;
+            padding: 40px 36px 40px;
             background: #fff;
-            border-radius: 14px;
-            padding: 2.5rem 2rem;
+            position: relative;
+        }
+
+        .success-box {
             text-align: center;
-            max-width: 360px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            max-width: 460px;
+            margin: 0 auto;
         }
 
-        .modal-box .icon {
-            width: 56px;
-            height: 56px;
-            background: #fff0f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-        }
-
-        .modal-box h5 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #111;
-        }
-
-        .modal-box .number {
-            font-size: 1.4rem;
+        .success-box h1 {
+            font-size: 2.35rem;
             font-weight: 700;
             color: #e30613;
-            margin: 0.5rem 0 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
-        .modal-box .btn-close-modal {
+        .success-box p {
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+
+        /* Seller Contact Box */
+        .contact-box {
+            background: #f8f9fa;
+            border: 2px solid #e30613;
+            border-radius: 12px;
+            padding: 26px 20px;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-box label {
+            font-size: 0.83rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .contact-number {
+            font-size: 1.68rem;
+            font-weight: 700;
+            color: #e30613;
+            letter-spacing: 2px;
+            word-break: break-all;
+        }
+
+        /* Close Button - Same style as Submit */
+        .btn-close {
+            display: block;
+            width: 65%;
+            margin: 0 auto;
             background: #e30613;
             color: #fff;
             border: none;
             border-radius: 8px;
-            padding: 10px 40px;
-            font-size: 0.95rem;
-            font-weight: 600;
+            padding: 13px 0;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
 
-        .modal-box .btn-close-modal:hover { background: #c20511; }
+        .btn-close:hover {
+            background: #c20511;
+        }
+
+        .btn-close:active {
+            transform: scale(0.97);
+        }
 
         /* Responsive */
         @media (max-width: 580px) {
             .sidebar { display: none; }
-            .form-section { padding: 28px 20px; }
-            .btn-submit { width: 100%; }
+            .form-section, .success-content { padding: 32px 20px; }
+            .btn-submit, .btn-close { width: 100%; }
         }
     </style>
 </head>
 <body>
 
+{% if show_modal %}
+<!-- SUCCESS PAGE (Seller Contact Screen) -->
+<div class="mortgage-card">
+    <!-- Left Red Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <img src="{% static 'images/logo.png' %}" alt="Bank Alfalah Logo">
+        </div>
+        <div class="sidebar-title">Alfa<br>Mortgage</div>
+    </div>
+
+    <!-- Success Content -->
+    <div class="success-content">
+        <a href="{% url 'browse_properties' %}" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
+            Back
+        </a>
+
+        <div class="success-box">
+            <h1>Congratulations</h1>
+            <p>
+                Your request has been received.<br>
+                For further assistance, please contact<br>
+                the seller at:
+            </p>
+
+            <div class="contact-box">
+                <label>Seller Contact Number</label>
+                <div class="contact-number">{{ seller_number }}</div>
+            </div>
+
+            <button onclick="window.location.href='{% url 'browse_properties' %}'" class="btn-close">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<!-- FORM PAGE -->
 <div class="mortgage-card">
 
     <!-- Left Red Sidebar -->
-    {% comment %} <div class="sidebar">
+    <div class="sidebar">
         <div class="sidebar-logo">
             <img src="{% static 'images/logo.png' %}" alt="Bank Alfalah Logo">
-            <span>Bank Alfalah</span>
         </div>
         <div class="sidebar-title">Alfa<br>Mortgage</div>
-    </div> {% endcomment %}
-    <div class="sidebar">
-    <div class="sidebar-logo">
-        <img src="{% static 'images/logo.png' %}" alt="Bank Alfalah Logo">
     </div>
-
-    <div class="sidebar-title">Alfa<br>Mortgage</div>
-</div>
-
 
     <!-- Right Form -->
     <div class="form-section">
@@ -309,22 +353,6 @@
 
             <button type="submit" class="btn-submit">Submit</button>
         </form>
-    </div>
-</div>
-
-<!-- Success Modal -->
-{% if show_modal %}
-<div class="modal-overlay">
-    <div class="modal-box">
-        <div class="icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e30613" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-            </svg>
-        </div>
-        <h5>Seller Contact</h5>
-        <p style="color:#666; font-size:0.85rem;">Reach out to the seller directly</p>
-        <div class="number">{{ seller_number }}</div>
-        <a href="/" class="btn-close-modal">Close</a>
     </div>
 </div>
 {% endif %}
