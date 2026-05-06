@@ -1,0 +1,291 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alfa Mortgage - Responsive Combined</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              tahoma: ["Tahoma", "Arial", "sans-serif"],
+            },
+            colors: {
+              primaryText: "#141519",
+              secondaryText: "#6B6F80",
+              surface: "#F2F2F4",
+              borderDefault: "#CDCFD4",
+              brand: "#D30248",
+            },
+            boxShadow: {
+              card: "0 10px 25px rgba(0, 0, 0, 0.08)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .brand-logo {
+        display: flex;
+        height: 56px;
+        padding: 0 16px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 8px;
+        width: 220px;
+      }
+
+      .brand-logo-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .brand-alfa-img {
+        height: 18px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      .logo-gradient-text {
+        background: radial-gradient(100% 100% at 0% 50%, #000 0%, #d30248 40%, #d30202 80%, #d34802 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: "Cabinet Grotesk Variable", "Cabinet Grotesk", sans-serif;
+        font-size: 24px;
+        line-height: 100%;
+        font-weight: 500;
+        font-variant: small-caps;
+        transform: translateY(1px);
+      }
+
+      .nav-middle-link {
+        color: #000;
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.486px;
+      }
+
+      @media (max-width: 768px) {
+        .brand-alfa-img {
+          height: 20px;
+        }
+
+        .logo-gradient-text {
+          font-size: 28px;
+          transform: translateY(0);
+        }
+
+        .brand-logo {
+          width: auto;
+          padding: 0;
+          height: auto;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-tahoma text-primaryText bg-white">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+      <!-- Navbar -->
+      <header class="mt-3 mx-auto flex w-full max-w-[1280px] items-center justify-between">
+        <div class="brand-logo">
+          <div class="brand-logo-row">
+            <img src="{% static 'images/Vector.svg' %}" alt="Alfa" class="brand-alfa-img" />
+            <span class="logo-gradient-text">Mortgage</span>
+          </div>
+        </div>
+
+        <nav class="hidden lg:flex items-center">
+          <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Buy Property</a>
+          <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Sell Property</a>
+          <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center gap-1">
+            Services
+            <span class="text-[11px] translate-y-[1px]">⌄</span>
+          </a>
+          <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Mortgage Calculator</a>
+          <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">About</a>
+        </nav>
+
+        <div class="flex items-center gap-2 md:gap-3">
+          <button class="hidden md:inline-flex px-4 py-3 justify-center items-center gap-2 rounded-[12px] text-white text-[16px] leading-6 tracking-[-0.486px] bg-[linear-gradient(65deg,#000_0%,#D30248_27.15%,#D30202_54.3%,#D34802_67.88%)]">
+            Apply for Mortgage
+          </button>
+          <button class="inline-flex px-4 py-3 justify-center items-center text-black font-tahoma text-[16px] not-italic font-normal leading-6 tracking-[-0.486px]">
+            Login/ Signup
+          </button>
+          <button class="hidden md:inline-flex h-11 w-11 items-center justify-center rounded-full border border-borderDefault bg-white">
+            <img src="https://www.figma.com/api/mcp/asset/35448619-ab07-45a3-89a1-ed755b3d4221" alt="User" class="w-5 h-5" />
+          </button>
+        </div>
+      </header>
+
+      <!-- Hero -->
+      <section class="mt-8 bg-surface rounded-3xl p-6 md:p-10 grid md:grid-cols-2 gap-6 items-center">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-bold leading-tight">
+            Buy, Sell &amp; Finance Property - 100% Digitally
+          </h1>
+          <p class="mt-4 text-secondaryText text-base md:text-lg leading-relaxed">
+            Search verified properties, get valuation and legal services, and secure mortgage financing without visiting a branch.
+          </p>
+          <div class="mt-6 grid sm:grid-cols-3 gap-3">
+            <input class="h-12 rounded-xl px-4 border border-borderDefault" placeholder="Enter location" />
+            <input class="h-12 rounded-xl px-4 border border-borderDefault" placeholder="Select size" />
+            <input class="h-12 rounded-xl px-4 border border-borderDefault" placeholder="Set budget" />
+          </div>
+          <button class="mt-4 h-12 px-6 rounded-xl text-white bg-gradient-to-r from-black via-[#D30248] via-[#D30202] to-[#D34802]">
+            Find Property To Buy
+          </button>
+        </div>
+        <div class="flex justify-center">
+          <img
+            src="https://www.figma.com/api/mcp/asset/31da2e55-8d59-4a04-b5c3-b13684f7e1ec"
+            alt="Hero house"
+            class="w-full max-w-[520px] object-contain"
+          />
+        </div>
+      </section>
+
+      <!-- Quick actions -->
+      <section class="mt-20 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="quickActions"></section>
+
+      <!-- Featured properties -->
+      <section class="mt-20">
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="text-2xl md:text-3xl font-bold">Featured Properties</h2>
+          <button class="text-brand font-semibold">View All Properties</button>
+        </div>
+        <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="featuredGrid"></div>
+      </section>
+
+      <!-- Services -->
+      <section class="mt-20 grid lg:grid-cols-2 gap-6">
+        <article class="rounded-3xl bg-surface p-8 text-center">
+          <div class="mx-auto w-24 h-24 rounded-full bg-white shadow-card flex items-center justify-center text-3xl">%</div>
+          <h3 class="mt-6 text-2xl font-bold">Property Valuation</h3>
+          <p class="mt-3 text-secondaryText max-w-[540px] mx-auto">
+            Search verified properties, get valuation and legal services, and secure mortgage financing without visiting a branch.
+          </p>
+          <button class="mt-6 text-brand font-semibold">Request Property Valuation</button>
+        </article>
+        <article class="rounded-3xl bg-surface p-8 text-center">
+          <div class="mx-auto w-24 h-24 rounded-full bg-white shadow-card flex items-center justify-center text-3xl">L</div>
+          <h3 class="mt-6 text-2xl font-bold">Legal Opinion</h3>
+          <p class="mt-3 text-secondaryText max-w-[540px] mx-auto">
+            Search verified properties, get valuation and legal services, and secure mortgage financing without visiting a branch.
+          </p>
+          <button class="mt-6 text-brand font-semibold">Request Legal Opinion</button>
+        </article>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-20 bg-surface/70 border-t border-borderDefault">
+      <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-12 grid lg:grid-cols-[1.2fr_2fr] gap-10">
+        <div>
+          <div class="brand-logo">
+            <img src="{% static 'images/Vector.svg' %}" alt="Alfa" class="brand-alfa-img" />
+            <span class="logo-gradient-text">Mortgage</span>
+          </div>
+          <p class="mt-4 text-secondaryText max-w-sm">
+            The purpose of a FAQ is generally to provide information on frequent questions or concerns.
+          </p>
+          <div class="mt-6 flex gap-3">
+            <span class="w-10 h-10 rounded-full bg-white border border-borderDefault grid place-content-center">in</span>
+            <span class="w-10 h-10 rounded-full bg-white border border-borderDefault grid place-content-center">x</span>
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-8 text-[15px]">
+          <div>
+            <h5 class="font-bold mb-4">Alfa Mortgage</h5>
+            <ul class="space-y-3 text-secondaryText">
+              <li>About us</li>
+              <li>Agency profile</li>
+              <li>FAQ</li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="font-bold mb-4">Tools &amp; resources</h5>
+            <ul class="space-y-3 text-secondaryText">
+              <li>Property Valuation</li>
+              <li>Financing Calculator</li>
+              <li>Guides &amp; Articles</li>
+            </ul>
+          </div>
+          <div>
+            <h5 class="font-bold mb-4">Legal</h5>
+            <ul class="space-y-3 text-secondaryText">
+              <li>Terms of Service</li>
+              <li>Privacy Policy / GDPR</li>
+              <li>Cookie Policy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-borderDefault py-4 text-center text-sm text-secondaryText">
+        ©Transparent 2024. All rights reserved
+      </div>
+    </footer>
+
+    <script>
+      const quickActions = [
+        { title: "Buy Property", icon: "https://www.figma.com/api/mcp/asset/9b8019e1-8ebf-43da-93b0-23de4a193510" },
+        { title: "Sell Property", icon: "https://www.figma.com/api/mcp/asset/35448619-ab07-45a3-89a1-ed755b3d4221" },
+        { title: "Apply for Mortgage", icon: "https://www.figma.com/api/mcp/asset/d2affa14-f61d-4da3-a295-c47aad907fac" },
+        { title: "Mortgage Calculator", icon: "https://www.figma.com/api/mcp/asset/2b20d4cf-5d44-4f3e-ac82-d77a0ef208f2" },
+      ];
+
+      const featured = new Array(4).fill(0).map((_, i) => ({
+        title: i % 2 === 0 ? "Modern family house in Karachi" : "Luxury villa with sea-facing view",
+        location: "DHA Phase 6, Karachi",
+        price: i % 2 === 0 ? "PKR 7.5 Crore" : "PKR 11.2 Crore",
+        size: "430 m²",
+        image: "https://www.figma.com/api/mcp/asset/31da2e55-8d59-4a04-b5c3-b13684f7e1ec",
+      }));
+
+      const quickContainer = document.getElementById("quickActions");
+      quickActions.forEach((item) => {
+        const card = document.createElement("button");
+        card.className =
+          "h-36 rounded-2xl border border-borderDefault bg-white px-4 py-5 flex flex-col justify-between text-left hover:shadow-card transition";
+        card.innerHTML = `
+          <div class="flex items-start justify-between">
+            <span class="w-[59px] h-[59px] rounded-full bg-surface flex items-center justify-center">
+              <img src="${item.icon}" alt="" class="w-6 h-6" />
+            </span>
+            <span class="text-2xl rotate-45">↑</span>
+          </div>
+          <span class="text-[22px]">${item.title}</span>
+        `;
+        quickContainer.appendChild(card);
+      });
+
+      const featuredContainer = document.getElementById("featuredGrid");
+      featured.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "rounded-2xl border border-borderDefault overflow-hidden bg-white";
+        card.innerHTML = `
+          <div class="h-56 bg-surface">
+            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-secondaryText">${item.location}</p>
+            <h3 class="mt-1 font-semibold text-lg leading-snug">${item.title}</h3>
+            <p class="mt-2 text-brand font-bold">${item.price}</p>
+            <p class="mt-1 text-sm text-secondaryText">Size: ${item.size}</p>
+          </div>
+        `;
+        featuredContainer.appendChild(card);
+      });
+    </script>
+  </body>
+</html>
