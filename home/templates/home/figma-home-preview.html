@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alfa Mortgage - Home Screen (Guest)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              tahoma: ["Tahoma", "sans-serif"],
+            },
+            colors: {
+              primaryText: "#141519",
+              secondaryText: "#6B6F80",
+              surface: "#F2F2F4",
+              borderSubtle: "#F2F2F4",
+              borderDefault: "#CDCFD4",
+            },
+            boxShadow: {
+              glass: "0 4px 4px rgba(0,0,0,0.10)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .glass {
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+      }
+    </style>
+  </head>
+  <body class="bg-[#EDEDED] min-h-screen flex justify-center py-8 font-tahoma">
+    <main class="w-[390px]">
+      <section class="relative">
+        <div class="bg-surface rounded-3xl overflow-hidden p-5 pt-8 h-[441px] relative">
+          <h1 class="text-primaryText text-[24px] leading-7 font-bold tracking-[-0.4865px] max-w-[325px]">
+            Buy, Sell &amp; Finance Property — 100% Digitally
+          </h1>
+          <p class="text-secondaryText text-[14px] leading-5 tracking-[-0.5px] mt-3 max-w-[325px]">
+            Search verified properties, get valuation &amp; legal services, and secure mortgage financing without visiting a branch.
+          </p>
+
+          <img
+            src="https://www.figma.com/api/mcp/asset/31da2e55-8d59-4a04-b5c3-b13684f7e1ec"
+            alt="House"
+            class="absolute left-1/2 -translate-x-1/2 top-[175px] w-[320px] object-contain"
+          />
+        </div>
+
+        <div class="glass bg-white/25 rounded-3xl shadow-glass w-[331px] absolute left-1/2 -translate-x-1/2 top-[365px] border border-white/40 overflow-hidden">
+          <div class="px-6 py-3">
+            <p class="text-primaryText text-[14px] leading-6 tracking-[-0.5px]">Where</p>
+            <input id="where" class="w-full bg-transparent outline-none text-secondaryText text-[16px] leading-6 mt-1" placeholder="Enter location" />
+          </div>
+
+          <div class="px-6 py-3 border-y border-borderSubtle">
+            <p class="text-primaryText text-[14px] leading-6 tracking-[-0.5px]">Area</p>
+            <input id="area" class="w-full bg-transparent outline-none text-secondaryText text-[16px] leading-6 mt-1" placeholder="Select size" />
+          </div>
+
+          <div class="px-6 py-3">
+            <p class="text-primaryText text-[14px] leading-6 tracking-[-0.5px]">Budget</p>
+            <input id="budget" class="w-full bg-transparent outline-none text-secondaryText text-[16px] leading-6 mt-1" placeholder="Set budget" />
+          </div>
+
+          <div class="px-6 py-3 flex gap-2 items-center">
+            <button class="w-12 h-12 rounded-full bg-surface flex items-center justify-center" aria-label="filters">
+              <img src="https://www.figma.com/api/mcp/asset/de2afc36-79db-495b-afef-3b32b350da75" alt="" class="w-6 h-6" />
+            </button>
+            <button
+              id="searchBtn"
+              class="flex-1 h-12 rounded-xl text-white text-[16px] leading-6 tracking-[-0.5px] bg-gradient-to-r from-black via-[#D30248] via-[#D30202] to-[#D34802]"
+            >
+              Find Property To Buy
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-[240px] grid grid-cols-2 gap-6 px-[15px]">
+        <template id="action-card-template">
+          <button class="h-36 rounded-2xl border border-borderDefault bg-white px-3 py-5 flex flex-col justify-between text-left">
+            <div class="flex items-start justify-between">
+              <span class="w-[59px] h-[59px] rounded-full bg-surface flex items-center justify-center">
+                <img class="w-6 h-6 action-icon" alt="" />
+              </span>
+              <img src="https://www.figma.com/api/mcp/asset/74d4fbcc-603b-4c14-88ec-4527625b2398" alt="" class="w-6 h-6 rotate-135" />
+            </div>
+            <span class="text-primaryText text-[16px] leading-5 tracking-[-0.4865px] action-title"></span>
+          </button>
+        </template>
+        <div id="actionGrid" class="contents"></div>
+      </section>
+    </main>
+
+    <script>
+      const actions = [
+        { title: "Buy Property", icon: "https://www.figma.com/api/mcp/asset/9b8019e1-8ebf-43da-93b0-23de4a193510" },
+        { title: "Apply for Mortgage", icon: "https://www.figma.com/api/mcp/asset/d2affa14-f61d-4da3-a295-c47aad907fac" },
+        { title: "Sell Property", icon: "https://www.figma.com/api/mcp/asset/35448619-ab07-45a3-89a1-ed755b3d4221" },
+        { title: "Mortgage Calculator", icon: "https://www.figma.com/api/mcp/asset/2b20d4cf-5d44-4f3e-ac82-d77a0ef208f2" },
+      ];
+
+      const grid = document.getElementById("actionGrid");
+      const tpl = document.getElementById("action-card-template");
+
+      actions.forEach((item) => {
+        const node = tpl.content.cloneNode(true);
+        node.querySelector(".action-title").textContent = item.title;
+        node.querySelector(".action-icon").src = item.icon;
+        grid.appendChild(node);
+      });
+
+      document.getElementById("searchBtn").addEventListener("click", () => {
+        const where = document.getElementById("where").value || "Any location";
+        const area = document.getElementById("area").value || "Any size";
+        const budget = document.getElementById("budget").value || "Any budget";
+        alert(`Searching:\nLocation: ${where}\nArea: ${area}\nBudget: ${budget}`);
+      });
+    </script>
+  </body>
+</html>

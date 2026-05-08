@@ -1,73 +1,891 @@
-.hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.70)),
-                url('/static/images/karachi-night.jpg') center/cover no-repeat fixed;
-    height: 100vh;
+/* ===========================
+   CSS VARIABLES & RESET
+=========================== */
+:root {
+    --primary-red: #e30613;
+    --dark-red: #c0040f;
+    --light-pink: #ffe5e8;
+    --text-dark: #1a1a1a;
+    --text-gray: #666666;
+    --text-light: #999999;
+    --border-color: #e0e0e0;
+    --white: #ffffff;
+    --background-light: #f8f9fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--white);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===========================
+   NAVBAR STYLES
+=========================== */
+/* .navbar {
+    padding: 1rem 0;
+    background: white !important;
+} */
+
+.custom-navbar {
+    width: 100%;
+    padding: 20px 60px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #fff;
+}
+
+
+/* LOGO */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* .logo-icon {
+    width: 40px;
+    height: 18px;
+    background: #000;
+    border-radius: 4px;
+} */
+/* .logo-icon{
+    width:40px;
+    height:18px;
+    object-fit:contain;
+} */
+ .logo-icon{
+    width:40px;
+    height:auto;
+    object-fit:contain;
+}
+.nav-logo h2 {
+    font-size: 24px;
+    font-family: 'Cabinet Grotesk Variable', sans-serif;
+    font-weight: 500;
+    line-height: 24px;
+    color: #000;
+}
+
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #000;
+
+    font-size: 16px;
+    font-family: Tahoma, sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #D30248;
+}
+
+.dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown-link span {
+    font-size: 14px;
+}
+
+
+/* RIGHT SIDE */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* APPLY BUTTON */
+.apply-btn {
+    padding: 12px 16px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: linear-gradient(
+        90deg,
+        black 0%,
+        #D30248 40%,
+        #D30202 80%,
+        #D34802 100%
+    );
+
     color: white;
+
+    font-size: 16px;
+    font-family: Tahoma, sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.apply-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+/* LOGIN SECTION */
+.login-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 16px;
+    font-family: Tahoma, sans-serif;
+}
+
+
+/* PROFILE ICON */
+.profile-icon {
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid #CDCFD4;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 18px;
+    background: #fff;
+}
+
+.navbar {
+    padding: 18px 0;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.brand-alfa {
+    color: var(--primary-red);
+}
+
+.brand-mortgage {
+    color: var(--text-dark);
+}
+
+.nav-link {
+    color: var(--text-dark) !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-red) !important;
+}
+
+.btn-apply {
+    background-color: var(--primary-red);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-apply:hover {
+    background-color: var(--dark-red);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(227, 6, 19, 0.3);
+}
+
+.btn-login {
+    background-color: transparent;
+    color: var(--text-dark);
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+.hero-section {
+    background: linear-gradient(135deg, #ffe5e8 0%, #ffd4d9 100%);
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Search Filters */
+.search-filters {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     position: relative;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+.filter-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
-.red-btn {
-    background-color: #e30613;
+.filter-input {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.filter-input:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.1);
+    outline: none;
+}
+
+.btn-search {
+    background-color: var(--primary-red);
     color: white;
-    padding: 14px 32px;
     border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+}
+
+.btn-search:hover {
+    background-color: var(--dark-red);
+    transform: scale(1.1);
+}
+
+/* ===========================
+   QUICK ACTION CARDS
+=========================== */
+.quick-actions-section {
+    padding: 60px 0;
+    background: var(--background-light);
+}
+
+.action-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-red);
+}
+
+.action-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #ffe5e8 0%, #ffd4d9 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.8rem;
+    color: var(--primary-red);
+}
+
+.action-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0;
+}
+
+.action-arrow {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.action-card:hover .action-arrow {
+    color: var(--primary-red);
+    transform: translateX(5px);
+}
+
+/* ===========================
+   FEATURED PROPERTIES
+=========================== */
+.featured-properties-section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0;
+}
+
+.btn-view-all {
+    background-color: var(--primary-red);
+    color: white;
+    padding: 10px 24px;
     border-radius: 6px;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    border: none;
     transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    min-width: 180px;
-    text-align: center;
 }
 
-.red-btn:hover {
-    background-color: #c0040f;
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(227, 6, 19, 0.4);
+.btn-view-all:hover {
+    background-color: var(--dark-red);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(227, 6, 19, 0.3);
 }
 
-.action-box {
-    background: rgba(255, 255, 255, 0.95);
-    color: #222;
-    padding: 22px 25px;
-    border-radius: 8px;
+.properties-slider {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.properties-slider::-webkit-scrollbar {
+    height: 8px;
+}
+
+.properties-slider::-webkit-scrollbar-track {
+    background: var(--background-light);
+    border-radius: 4px;
+}
+
+.properties-slider::-webkit-scrollbar-thumb {
+    background: var(--primary-red);
+    border-radius: 4px;
+}
+
+/* ===========================
+   PROPERTY CARDS
+=========================== */
+.property-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    height: 100%;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.property-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--primary-red);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
     font-weight: 600;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 }
 
-.action-box:hover {
-    transform: translateY(-3px);
-}
-.sidebar-red h2 { 
-    font-weight: 700; 
-    font-size: 1.6rem;   /* Reduced from 2.5rem */
-    line-height: 1.2;    /* Slightly increased for a single line */
-    white-space: nowrap; /* Forces the text to stay on one line */
-}
-.property-card .row {
-    min-height: 280px;
-}
-
-.property-card img {
+.property-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.property-card a:hover img {
+.property-card:hover .property-image {
     transform: scale(1.05);
 }
 
-.property-card .card-body {
+.property-body {
+    padding: 1.5rem;
+}
+
+.property-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.property-location {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin-bottom: 1rem;
+}
+
+.property-location i {
+    margin-right: 5px;
+    color: var(--primary-red);
+}
+
+.property-footer {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.property-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-red);
+}
+
+.property-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+}
+
+.property-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.property-meta i {
+    color: var(--text-light);
+}
+
+/* ===========================
+   REAL ESTATE AGENT BANNER
+=========================== */
+.agent-banner-section {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    padding: 80px 0;
+    margin: 60px 0;
+    border-radius: 24px;
+    color: white;
+}
+
+.agent-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.agent-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+}
+
+.btn-register {
+    background-color: var(--primary-red);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-register:hover {
+    background-color: var(--dark-red);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(227, 6, 19, 0.4);
+}
+
+.agent-image {
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+/* ===========================
+   PROPERTIES IN KARACHI
+=========================== */
+.properties-karachi-section {
+    padding: 80px 0;
+    background: var(--background-light);
+}
+
+/* ===========================
+   PROCESS SECTION
+=========================== */
+.process-section {
+    padding: 80px 0;
+}
+
+.process-subtitle {
+    font-size: 0.95rem;
+    color: var(--primary-red);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.process-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.process-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.process-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ffe5e8 0%, #ffd4d9 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 2rem;
+    color: var(--primary-red);
+}
+
+.process-step {
+    background: var(--primary-red);
+    color: white;
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.process-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+/* ===========================
+   SERVICES SECTION
+=========================== */
+.services-section {
+    padding: 80px 0;
+    background: var(--background-light);
+}
+
+.service-card {
+    background: white;
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    border: 1px solid var(--border-color);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #ffe5e8 0%, #ffd4d9 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 2.5rem;
+    color: var(--primary-red);
+}
+
+.service-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+}
+
+.service-description {
+    font-size: 1rem;
+    color: var(--text-gray);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.btn-service {
+    background: transparent;
+    color: var(--primary-red);
+    padding: 12px 28px;
+    border: 2px solid var(--primary-red);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-service:hover {
+    background: var(--primary-red);
+    color: white;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+.footer-section {
+    background: #1a1a1a;
+    color: white;
+    padding: 60px 0 30px;
+}
+
+.footer-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: var(--primary-red);
+    transform: translateY(-3px);
+}
+
+.footer-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin-bottom: 1.5rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 3rem;
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+@media (max-width: 991px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-section {
+        padding: 60px 0 40px;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .agent-title {
+        font-size: 2rem;
+    }
+    
+    .service-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    .hero-subtitle {
+        text-align: center;
+    }
+    
+    .search-filters {
+        padding: 1.5rem;
+    }
+    
+    .btn-search {
+        position: static;
+        margin: 1rem auto 0;
+    }
+    
+    .quick-actions-section {
+        padding: 40px 0;
+    }
+    
+    .featured-properties-section,
+    .properties-karachi-section,
+    .process-section,
+    .services-section {
+        padding: 50px 0;
+    }
+    
+    .agent-banner-section {
+        padding: 50px 0;
+        text-align: center;
+    }
+}
+
+/* ===========================
+   UTILITY CLASSES
+=========================== */
+.text-danger {
+    color: var(--primary-red) !important;
+}
+
+.bg-light {
+    background-color: var(--background-light) !important;
 }

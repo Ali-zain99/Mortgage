@@ -27,7 +27,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+AUTHENTICATION_BACKENDS = [
+    'home.firebase_auth.FirebaseAuthenticationBackend',  # Replace 'your_app' with your app name
+    'django.contrib.auth.backends.ModelBackend',  # Keep default backend as fallback
+]
+ 
+# 2. Session configuration (optional but recommended)
+SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
+SESSION_SAVE_EVERY_REQUEST = True
+ 
+# 3. CSRF settings for API endpoints
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    # Add your production domain here
+    # 'https://yourdomain.com',
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -127,3 +142,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'alizainsharif48@gmail.com'  # Your Gmail
+EMAIL_HOST_PASSWORD = 'xqbh myts ravs uclw'  # Gmail App Password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

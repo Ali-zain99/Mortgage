@@ -27,7 +27,12 @@
 <!-- Simple Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
   <div class="container">
-    <img src="{% static 'images/logo.png' %}" alt="DreamHome Logo" height="55" class="d-inline-block align-top">
+    {% comment %} <a href="{% url 'homepage' %}">
+       <img src="{% static 'images/logo.png' %}"  
+           alt="DreamHome Logo" 
+           height="55" 
+           class="d-inline-block align-top">
+    </a> {% endcomment %}
     <div>
         <a href="{% url 'homepage' %}" class="btn btn-outline-danger me-2">
             ← Back to Home

@@ -1,0 +1,606 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa Mortgage Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Elements */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(227,6,19,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(227,6,19,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        /* Calculator Card */
+        .calculator-wrapper {
+            display: flex;
+            max-width: 950px;
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.5);
+            background: #fff;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Left Sidebar - Red */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #e30613 0%, #b40510 100%);
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            top: -100px;
+            right: -80px;
+        }
+
+        .sidebar-logo {
+            position: relative;
+            z-index: 1;
+        }
+
+        .sidebar-logo img {
+            width: 60px;
+            height: auto;
+            filter: brightness(0) invert(1);
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-title {
+            color: #fff;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sidebar-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Right Form Section */
+        .form-section {
+            flex: 1;
+            padding: 3rem 3.5rem;
+            background: #fff;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 0.9rem;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #e30613;
+            gap: 12px;
+        }
+
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .form-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control,
+        .form-select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #333;
+            background: #f9f9f9;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #e30613;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(227,6,19,0.08);
+        }
+
+        .form-control::placeholder {
+            color: #aaa;
+        }
+
+        .form-control.calculated {
+            background: #fff5f5;
+            border-color: #e30613;
+            color: #e30613;
+            font-weight: 600;
+            cursor: not-allowed;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Result Box */
+        .result-box {
+            background: linear-gradient(135deg, #e30613 0%, #b40510 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(227,6,19,0.2);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .result-label {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-value {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .result-sublabel {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Submit Button */
+        .btn-continue {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, #e30613 0%, #b40510 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(227,6,19,0.3);
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(227,6,19,0.4);
+        }
+
+        .btn-continue:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .calculator-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 2rem 1.5rem;
+            }
+
+            .sidebar-title {
+                font-size: 2.2rem;
+            }
+
+            .form-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .result-value {
+                font-size: 2rem;
+            }
+        }
+
+        /* Custom Select Arrow */
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-wrapper">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <img src="{% static 'images/logo.png' %}" alt="Bank Alfalah Logo">
+        </div>
+        <div class="sidebar-title">Alfa<br>Mortgage</div>
+        <p class="sidebar-subtitle">Calculate your dream home financing in seconds</p>
+    </div>
+
+    <!-- Right Form -->
+    <div class="form-section">
+        <a href="{% url 'homepage' %}" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
+            Back to Home
+        </a>
+
+        <div class="form-header">
+            <h2>Mortgage Calculator</h2>
+            <p>Please select your financing details below</p>
+        </div>
+
+        <form id="mortgageForm" method="POST" action="{% url 'calculate_mortgage' %}">
+            {% csrf_token %}
+
+            <!-- Segment -->
+            <div class="form-group">
+                <label class="form-label">Segment</label>
+                <select name="segment" id="segment" class="form-select" required>
+                    <option value="">Select Segment</option>
+                    <option value="Salaried">Salaried</option>
+                    <option value="Businessman">Businessman</option>
+                    <option value="Self-Employed">Self-Employed</option>
+                </select>
+            </div>
+
+            <!-- Two Column Row -->
+            <div class="two-col">
+                <div class="form-group">
+                    <label class="form-label">Property Value</label>
+                    <input type="number" 
+                           name="property_value" 
+                           id="propertyValue" 
+                           class="form-control" 
+                           placeholder="Please enter Property Amount"
+                           step="100000"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Date of Birth</label>
+                    <input type="date" 
+                           name="dob" 
+                           id="dob" 
+                           class="form-control" 
+                           required>
+                </div>
+            </div>
+
+            <!-- Two Column Row -->
+            <div class="two-col">
+                <div class="form-group">
+                    <label class="form-label">Net Monthly Income</label>
+                    <input type="number" 
+                           name="monthly_income" 
+                           id="monthlyIncome" 
+                           class="form-control" 
+                           placeholder="Enter your monthly income"
+                           step="1000"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Expenses (Salary/Others)</label>
+                    <input type="number" 
+                           name="expenses" 
+                           id="expenses" 
+                           class="form-control" 
+                           placeholder="Enter monthly expenses"
+                           step="1000"
+                           required>
+                </div>
+            </div>
+
+            <!-- Auto-Calculated Fields -->
+            <div class="two-col">
+                <div class="form-group">
+                    <label class="form-label">Net Salary</label>
+                    <input type="text" 
+                           id="netSalary" 
+                           class="form-control calculated" 
+                           placeholder="Auto Calculated"
+                           readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tenure</label>
+                    <input type="text" 
+                           id="tenure" 
+                           class="form-control calculated" 
+                           placeholder="Auto Calculated from Age"
+                           readonly>
+                </div>
+            </div>
+
+            <!-- Result Box -->
+            <div class="result-box">
+                <div class="result-label">Equated Monthly Installment</div>
+                <div class="result-value" id="emiValue">0,000,000</div>
+                <div class="result-sublabel">Auto Calculated</div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-continue">Continue</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Get form elements
+    const propertyValue = document.getElementById('propertyValue');
+    const dob = document.getElementById('dob');
+    const monthlyIncome = document.getElementById('monthlyIncome');
+    const expenses = document.getElementById('expenses');
+    const netSalary = document.getElementById('netSalary');
+    const tenure = document.getElementById('tenure');
+    const emiValue = document.getElementById('emiValue');
+
+    // Calculate Age from DOB
+    function calculateAge(birthDate) {
+        const today = new Date();
+        const birth = new Date(birthDate);
+        let age = today.getFullYear() - birth.getFullYear();
+        const monthDiff = today.getMonth() - birth.getMonth();
+        
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        
+        return age;
+    }
+
+    // Calculate Tenure (Retirement age 60 - current age)
+    function calculateTenure(birthDate) {
+        const age = calculateAge(birthDate);
+        const retirementAge = 60;
+        const tenureYears = retirementAge - age;
+        
+        if (tenureYears <= 0) {
+            return 'N/A';
+        }
+        
+        return tenureYears + ' Years';
+    }
+
+    // Calculate Net Salary
+    function calculateNetSalary() {
+        const income = parseFloat(monthlyIncome.value) || 0;
+        const exp = parseFloat(expenses.value) || 0;
+        const net = income - exp;
+        
+        if (net > 0) {
+            netSalary.value = 'PKR ' + net.toLocaleString('en-PK');
+        } else {
+            netSalary.value = 'Auto Calculated';
+        }
+        
+        return net;
+    }
+
+    // Calculate EMI
+    function calculateEMI() {
+        const principal = parseFloat(propertyValue.value) || 0;
+        const birthDate = dob.value;
+        const net = calculateNetSalary();
+        
+        if (!birthDate || principal === 0 || net <= 0) {
+            emiValue.textContent = '0,000,000';
+            return;
+        }
+        
+        const age = calculateAge(birthDate);
+        const tenureYears = 60 - age;
+        
+        if (tenureYears <= 0) {
+            emiValue.textContent = 'N/A';
+            return;
+        }
+        
+        // Simple EMI calculation (using approximate formula)
+        // Assuming 12% annual interest rate
+        const annualRate = 0.12;
+        const monthlyRate = annualRate / 12;
+        const totalMonths = tenureYears * 12;
+        
+        // EMI = [P x R x (1+R)^N]/[(1+R)^N-1]
+        const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / 
+                    (Math.pow(1 + monthlyRate, totalMonths) - 1);
+        
+        if (isNaN(emi) || !isFinite(emi)) {
+            emiValue.textContent = '0,000,000';
+        } else {
+            emiValue.textContent = 'PKR ' + Math.round(emi).toLocaleString('en-PK');
+        }
+    }
+
+    // Update Tenure when DOB changes
+    dob.addEventListener('change', function() {
+    const age = calculateAge(this.value);
+
+    // 🚫 Age less than 21 → show alert immediately
+    if (age < 21) {
+        alert('Age must be at least 21 for mortgage eligibility');
+        this.value = ''; // clear invalid input
+        tenure.value = '';
+        emiValue.textContent = '0,000,000';
+        return;
+    }
+
+    // ✅ Continue normal flow if valid
+    const tenureText = calculateTenure(this.value);
+    tenure.value = tenureText;
+    calculateEMI();
+});
+
+    // Update calculations on input
+    monthlyIncome.addEventListener('input', calculateEMI);
+    expenses.addEventListener('input', calculateEMI);
+    propertyValue.addEventListener('input', calculateEMI);
+
+    // Form validation
+    document.getElementById('mortgageForm').addEventListener('submit', function(e) {
+        const segment = document.getElementById('segment').value;
+        
+        if (!segment) {
+            e.preventDefault();
+            alert('Please select a segment');
+            return;
+        }
+        
+        if (!dob.value) {
+            e.preventDefault();
+            alert('Please enter your date of birth');
+            return;
+        }
+        
+        const age = calculateAge(dob.value);
+        if (age >= 60) {
+            e.preventDefault();
+            alert('Age must be below 60 for mortgage eligibility');
+            return;
+        }
+        
+        if (age < 18) {
+            e.preventDefault();
+            alert('Age must be at least 18 for mortgage eligibility');
+            return;
+        }
+    });
+</script>
+
+</body>
+</html>

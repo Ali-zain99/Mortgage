@@ -1,4 +1,3 @@
-{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -91,15 +90,968 @@
           gap: 0;
         }
       }
+
+      /* Hide horizontal arrows when the 5-step row wraps to multiple rows */
+      @media (max-width: 1199px) {
+        #processStepsContainer {
+          gap: 32px !important;
+        }
+        #processStepsContainer .process-arrow {
+          display: none !important;
+        }
+      }
+
+      /* ----------- Hero section (Figma node 1:5708 mobile / desktop) ----------- */
+      .hero-desktop { display: block; }
+      .hero-mobile  { display: none; }
+
+      /* Desktop hero (matches existing 593px design) */
+      .hero-desktop-section {
+        position: relative;
+        margin-top: 32px;
+        height: 593px;
+        border-radius: 64px;
+        overflow: hidden;
+      }
+
+      /* Mobile hero — Figma 1:5709 (top card) + 1:5714 (search card) */
+      .hero-mobile {
+        margin-top: 16px;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        padding-bottom: 16px;
+      }
+
+      .hero-mobile-card {
+        position: relative;
+        background: #f2f2f4;
+        border-radius: 24px;
+        overflow: hidden;
+        height: 436px;
+      }
+      .hero-mobile-text {
+        position: absolute;
+        left: 19px;
+        top: 31px;
+        right: 19px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .hero-mobile-title {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 28px;
+        letter-spacing: -0.486px;
+        color: var(--Text-Colors---text-primary, #141519);
+        margin: 0;
+        height: 57px;
+        align-self: stretch;
+      }
+      .hero-mobile-subtitle {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -0.4865px;
+        color: #6b6f80;
+        margin: 0;
+      }
+      .hero-mobile-image-wrap {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 164px;
+        width: 324px;
+        height: 324px;
+        pointer-events: none;
+      }
+      .hero-mobile-image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+      }
+
+      .hero-mobile-search {
+        position: relative;
+        z-index: 2;
+        margin: -72px auto 0;
+        width: calc(100% - 20px);
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+      }
+      .hero-mobile-field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 24px;
+        width: 100%;
+        white-space: nowrap;
+      }
+      .hero-mobile-field-label {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.5px;
+        color: #141519;
+        margin: 0;
+      }
+      .hero-mobile-field-value {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.5px;
+        color: #6b6f80;
+        margin: 0;
+      }
+      .hero-mobile-field--bordered {
+        border-top: 1px solid #f2f2f4;
+        border-bottom: 1px solid #f2f2f4;
+      }
+      .hero-mobile-search-row {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        padding: 12px 24px;
+        width: 100%;
+      }
+      .hero-mobile-filter-btn {
+        width: 48px;
+        height: 48px;
+        background: #f2f2f4;
+        border: none;
+        border-radius: 29.188px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+      .hero-mobile-filter-btn img {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+      .hero-mobile-search-btn {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        background: linear-gradient(23.71deg, #000 0%, #d30248 27.15%, #d30202 54.3%, #d34802 67.88%);
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #ffffff;
+        white-space: nowrap;
+      }
+      .hero-mobile-search-btn p {
+        margin: 0;
+      }
+
+      /* Switch desktop -> mobile under 1024px */
+      @media (max-width: 1023px) {
+        .hero-desktop { display: none; }
+        .hero-mobile  { display: flex; }
+      }
+
+      /* Services cards (Property Valuation / Legal Opinion) — Figma 1:6162 / 12:774 */
+      .services-card {
+        background: #f2f2f4;
+        border-radius: 40px;
+        min-height: 581px;
+        padding: 80px 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 62px;
+      }
+      .services-card-icon-circle {
+        position: relative;
+        width: 191px;
+        height: 191px;
+        flex-shrink: 0;
+      }
+      .services-card-icon-bg {
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px;
+        border: 1px solid #cdcfd4;
+        background: #ffffff;
+        box-sizing: border-box;
+      }
+      .services-card-icon-wrap {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 52px;
+        height: 52px;
+      }
+      .services-card-icon {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+      .services-card-title {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 25px;
+        line-height: 31px;
+        font-weight: 400;
+        color: #141519;
+        margin: 0;
+        width: 100%;
+      }
+      .services-card-desc {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: -0.4865px;
+        font-weight: 400;
+        color: #6b6f80;
+        margin: 0;
+        width: 100%;
+        max-width: 540px;
+      }
+      .services-card-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        text-decoration: none;
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        color: #d34802;
+        white-space: nowrap;
+      }
+      .services-card-cta-icon {
+        width: 16px;
+        height: 16px;
+        transform: rotate(-90deg);
+        flex-shrink: 0;
+      }
+      @media (max-width: 768px) {
+        .services-card {
+          min-height: 0;
+          padding: 24px;
+          gap: 25px;
+          border-radius: 24px;
+        }
+        .services-card > div:first-child {
+          gap: 25px !important;
+        }
+        .services-card-icon-circle {
+          width: 100px;
+          height: 100px;
+        }
+        .services-card-icon-bg {
+          border: none;
+          background: #d9d9d9;
+        }
+        .services-card-icon-wrap {
+          width: 36px;
+          height: 36px;
+        }
+        .services-card > div:first-child > div:last-child {
+          gap: 25px !important;
+        }
+        .services-card-title {
+          font-size: 25px;
+          line-height: 31px;
+          text-align: center;
+        }
+        .services-card-desc {
+          font-size: 16px;
+          line-height: 20px;
+          letter-spacing: -0.4865px;
+          color: #000000;
+          text-align: center;
+          max-width: 100%;
+        }
+        .services-card-cta {
+          padding: 12px 16px;
+          gap: 0;
+          border-radius: 12px;
+          color: #ffffff;
+          background: linear-gradient(22.33deg, #000 0%, #d30248 27.152%, #d30202 54.304%, #d34802 67.88%);
+          justify-content: center;
+        }
+        .services-card-cta-icon {
+          width: 24px;
+          height: 24px;
+          filter: brightness(0) invert(1);
+        }
+      }
+
+      /* ----------- Featured Properties carousel (Figma node 1:5763 mobile) ----------- */
+      #featuredGrid {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+      }
+      #featuredGrid::-webkit-scrollbar { display: none; }
+
+      /* Figma node 1:5763 shows stat badges and hides type chip (opacity 0) */
+      .feat-info-badges { display: flex !important; }
+      .feat-house-badge { display: none !important; }
+
+      /* Mobile pagination dots — hidden on desktop */
+      .featured-dots { display: none; }
+
+      /* Mobile carousel behavior — < 1024px */
+      @media (max-width: 1023px) {
+        #featuredGrid {
+          display: flex;
+          width: 100%;
+          align-items: flex-start !important;
+          scroll-snap-type: x mandatory;
+          scroll-padding-left: 0px;
+          gap: 26px;
+          padding-bottom: 8px;
+        }
+        #featuredGrid > .featured-card {
+          scroll-snap-align: center;
+          scroll-snap-stop: always;
+        }
+        .featured-dots {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          margin-top: 16px;
+        }
+        .featured-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 9999px;
+          background: #cdcfd4;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          transition: width 0.3s ease, background-color 0.3s ease;
+        }
+        .featured-dot.active {
+          width: 24px;
+          background: linear-gradient(28.35deg, #000 0%, #d30248 27.15%, #d30202 54.3%, #d34802 67.88%);
+        }
+      }
+
+      /* Properties in Karachi — mobile header + horizontal cards (Figma 1:5974 / 1:5798 / 1:5842) */
+      .karachi-section-title {
+        font-family: Tahoma, Arial, sans-serif;
+      }
+      .karachi-view-all-text {
+        font-family: Tahoma, Arial, sans-serif;
+      }
+
+      @media (max-width: 1023px) {
+        .karachi-section-title {
+          font-size: 16px !important;
+          line-height: 31px !important;
+          font-weight: 700 !important;
+          letter-spacing: 0;
+        }
+        .karachi-view-all-text {
+          font-size: 12px !important;
+          line-height: 24px !important;
+          font-weight: 400 !important;
+        }
+        #karachiPropertiesGrid {
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          overflow-y: hidden;
+          gap: 12px;
+          padding-bottom: 8px;
+          -webkit-overflow-scrolling: touch;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        #karachiPropertiesGrid::-webkit-scrollbar {
+          display: none;
+        }
+        #karachiPropertiesGrid .karachi-property-card {
+          width: 283.05px;
+          min-width: 283.05px;
+          margin-left: 0;
+          margin-right: 0;
+          scroll-snap-align: start;
+          scroll-snap-stop: always;
+        }
+      }
+
+      /* Footer — Figma node 1:6199 */
+      .site-footer {
+        background: #ffffff;
+      }
+      .footer-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 120px;
+        flex-wrap: wrap;
+      }
+      .footer-logo-col {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 313px;
+        flex-shrink: 0;
+      }
+      .footer-logo-row {
+        display: flex;
+        align-items: baseline;
+        gap: 6.262px;
+        height: 40.703px;
+      }
+      .footer-alfa-img {
+        height: 28.179px;
+        width: 62.621px;
+        object-fit: contain;
+      }
+      .footer-logo-gradient-text {
+        background: radial-gradient(100% 100% at 0% 50%, #000 0%, #d30248 40%, #d30202 80%, #d34802 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: "Cabinet Grotesk Variable", "Cabinet Grotesk", sans-serif;
+        font-size: 37.572px;
+        line-height: 100%;
+        font-weight: 500;
+        font-variant: small-caps;
+      }
+      .footer-logo-content {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+      .footer-description {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: -0.25px;
+        font-weight: 400;
+        color: #1f1f1f;
+        margin: 0;
+        width: 313px;
+      }
+      .footer-socials {
+        display: flex;
+        gap: 13px;
+        align-items: flex-start;
+      }
+      .footer-social-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 9999px;
+        background: #fad9dd;
+        flex-shrink: 0;
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+      .footer-social-badge:hover {
+        background: #f5c4ca;
+      }
+      .footer-social-badge svg {
+        width: 20px;
+        height: 20px;
+        opacity: 0.8;
+        fill: #da291c;
+        display: block;
+      }
+
+      .footer-link-cols {
+        display: flex;
+        align-items: flex-start;
+        gap: 120px;
+        flex-wrap: wrap;
+      }
+      .footer-link-col {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .footer-col-heading {
+        font-family: Tahoma, Arial, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: -0.5px;
+        color: #da291c;
+        margin: 0;
+        white-space: nowrap;
+      }
+      .footer-col-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .footer-col-list a,
+      .footer-col-list li {
+        font-family: Tahoma, Arial, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.25px;
+        color: #1f1f1f;
+        white-space: nowrap;
+        text-decoration: none;
+      }
+      .footer-col-list a:hover {
+        color: #da291c;
+      }
+      .footer-bottom-bar {
+        border-top: 1px solid #cdcfd4;
+        padding: 16px 0;
+        text-align: center;
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 14px;
+        color: #6b6f80;
+      }
+
+      @media (max-width: 1024px) {
+        .footer-content {
+          gap: 40px;
+        }
+        .footer-link-cols {
+          gap: 56px;
+        }
+      }
+      @media (max-width: 768px) {
+        .site-footer {
+          background: #f2f2f4;
+          border-top-left-radius: 32px;
+          border-top-right-radius: 32px;
+          overflow: hidden;
+        }
+        .site-footer .max-w-\[1280px\] {
+          padding-top: 20px !important;
+          padding-bottom: 20px !important;
+        }
+        .footer-content {
+          flex-direction: column;
+          gap: 25px;
+        }
+        .footer-link-cols {
+          width: 100%;
+          flex-direction: column;
+          gap: 25px;
+          padding-top: 25px;
+          border-top: 1px solid #cdcfd4;
+        }
+        .footer-logo-col {
+          width: 100%;
+          gap: 20px;
+        }
+        .footer-logo-row {
+          height: 22.4px;
+          gap: 3.446px;
+        }
+        .footer-alfa-img {
+          width: 34.462px;
+          height: 15.508px;
+        }
+        .footer-logo-gradient-text {
+          font-size: 20.677px;
+        }
+        .footer-logo-content {
+          gap: 28px;
+        }
+        .footer-description {
+          width: 313px;
+          color: #6b6f80;
+        }
+        .footer-link-col {
+          gap: 20px;
+        }
+        .footer-col-heading {
+          font-size: 20px;
+          line-height: 24px;
+          letter-spacing: -0.5px;
+        }
+        .footer-col-list {
+          gap: 16px;
+        }
+        .footer-col-list a,
+        .footer-col-list li {
+          color: #6b6f80;
+          letter-spacing: -0.25px;
+        }
+        .footer-bottom-bar {
+          border-top: 1px solid #cdcfd4;
+          padding: 14px 16px;
+          font-size: 10px;
+          line-height: 12px;
+          color: #1f1f1f;
+        }
+      }
+
+      /* ----------- Agent CTA Banner (Figma node 1:4227 desktop / 1:5788 mobile) ----------- */
+      .agent-cta-section {
+        position: relative;
+        margin-top: 80px;
+        height: 593px;
+        border-radius: 64px;
+        overflow: hidden;
+        background: #f2f2f4;
+      }
+      .agent-cta-bg-image {
+        position: absolute;
+        left: 0;
+        top: -125px;
+        width: 100%;
+        height: calc(100% + 125px);
+        max-width: none;
+        object-fit: cover;
+        object-position: center top;
+        pointer-events: none;
+      }
+      .agent-cta-overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(ellipse at 0% 0%, rgba(0, 0, 0, 0) 40.393%, rgba(0, 0, 0, 1) 100%);
+        transform-origin: center;
+      }
+      .agent-cta-content {
+        position: absolute;
+        left: 96px;
+        top: 187px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 579px;
+        z-index: 10;
+      }
+      .agent-cta-title {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 48px;
+        font-weight: 400;
+        line-height: 60px;
+        letter-spacing: -0.4865px;
+        color: #ffffff;
+        margin: 0;
+      }
+      .agent-cta-subtitle {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -0.4865px;
+        color: #ffffff;
+        margin: 0;
+      }
+      .agent-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #ffffff;
+        background: linear-gradient(22.41deg, #000 0%, #d30248 27.152%, #d30202 54.304%, #d34802 67.88%);
+      }
+
+      @media (max-width: 1023px) {
+        .agent-cta-section {
+          margin-top: 40px;
+          height: 593px;
+          border-radius: 24px;
+        }
+        .agent-cta-bg-image {
+          top: 0;
+          height: 100%;
+          object-position: center top;
+        }
+        .agent-cta-overlay {
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0) 44%, rgba(0, 0, 0, 0.9) 100%);
+        }
+        .agent-cta-content {
+          left: 20px;
+          right: 20px;
+          top: auto;
+          bottom: 24px;
+          width: auto;
+          gap: 8px;
+        }
+        .agent-cta-title {
+          font-size: 32px;
+          line-height: 38.4px;
+        }
+        .agent-cta-subtitle {
+          font-size: 16px;
+          line-height: 20px;
+          color: #6b6f80;
+          max-width: 300px;
+        }
+      }
+
+      /* ----------- Mobile header (Figma node 1:6046) ----------- */
+      .header-mobile {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0;
+        background: #ffffff;
+      }
+      .header-mobile-icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background: #ffffff;
+        border: 1px solid #cdcfd4;
+        border-radius: 24px;
+        padding: 0;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+      .header-mobile-icon-btn img {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+      .header-mobile-logo {
+        display: flex;
+        align-items: baseline;
+        gap: 3.446px;
+        height: 22.4px;
+      }
+      .header-mobile-alfa-img {
+        height: 15.508px;
+        width: 34.462px;
+        object-fit: contain;
+      }
+      .header-mobile-gradient-text {
+        background: radial-gradient(100% 100% at 0% 50%, #000 0%, #d30248 40%, #d30202 80%, #d34802 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: "Cabinet Grotesk Variable", "Cabinet Grotesk", sans-serif;
+        font-size: 20.677px;
+        line-height: 100%;
+        font-weight: 500;
+        font-variant: small-caps;
+      }
+
+      /* Switch desktop header -> mobile header under 1024px */
+      @media (max-width: 1023px) {
+        .header-desktop { display: none !important; }
+        .header-mobile  { display: flex; }
+      }
+
+      /* ----------- Mobile hamburger drawer (Figma 35:5383 panel + 35:5408 nav) ----------- */
+      .mobile-menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 90;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .mobile-menu-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .mobile-menu-drawer {
+        position: fixed;
+        top: 16px;
+        bottom: 16px;
+        left: 16px;
+        width: 339px;
+        max-width: calc(100vw - 32px);
+        background: #ffffff;
+        border-radius: 44px;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transform: translateX(calc(-100% - 32px));
+        transition: transform 0.3s ease;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      }
+      .mobile-menu-drawer.open {
+        transform: translateX(0);
+      }
+
+      .mobile-menu-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 24px;
+        flex-shrink: 0;
+      }
+
+      .mobile-menu-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+        gap: 32px;
+        padding: 16px 32px 32px;
+        flex: 1 1 auto;
+        overflow-y: auto;
+      }
+
+      .mobile-menu-link {
+        width: 100%;
+        text-align: left;
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.4865px;
+        color: #141519;
+        text-decoration: none;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .mobile-menu-services {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 16px;
+        width: 100%;
+      }
+      .mobile-menu-services-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.4865px;
+        color: #141519;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        text-align: left;
+      }
+      .mobile-menu-services-row .arrow-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        transform: scaleY(-1);
+        transition: transform 0.2s ease;
+      }
+      .mobile-menu-services.collapsed .arrow-icon {
+        transform: scaleY(1);
+      }
+      .mobile-menu-services.collapsed .mobile-menu-submenu {
+        display: none;
+      }
+      .mobile-menu-submenu {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        padding-left: 32px;
+      }
+      .mobile-menu-sub-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.4865px;
+        color: #141519;
+        text-decoration: none;
+      }
+      .mobile-menu-sub-item .arrow-spacer {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Drawer footer (Figma node 35:5426) — Apply for Mortgage CTA */
+      .mobile-menu-footer {
+        flex-shrink: 0;
+        padding: 16px 24px 24px;
+      }
+      .mobile-menu-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #ffffff;
+        white-space: nowrap;
+        background: linear-gradient(18.28deg, #000 0%, #d30248 27.152%, #d30202 54.304%, #d34802 67.88%);
+      }
+
+      @media (min-width: 1024px) {
+        .mobile-menu-overlay,
+        .mobile-menu-drawer {
+          display: none !important;
+        }
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
     </style>
   </head>
   <body class="font-tahoma text-primaryText bg-white">
     <div class="max-w-[1280px] mx-auto px-4 md:px-8">
-      <!-- Navbar -->
-      <header class="mt-3 mx-auto flex w-full max-w-[1280px] items-center justify-between">
+      <!-- Navbar (Desktop, ≥ 1024px) -->
+      <header class="header-desktop mt-3 mx-auto flex w-full max-w-[1280px] items-center justify-between">
         <div class="brand-logo">
           <div class="brand-logo-row">
-            <img src="{% static 'images/Vector.svg' %}" alt="Alfa" class="brand-alfa-img" />
+            <img src="/static/images/Vector.svg" onerror="this.onerror=null;this.src='../../static/images/Vector.svg';" alt="Alfa" class="brand-alfa-img" />
             <span class="logo-gradient-text">Mortgage</span>
           </div>
         </div>
@@ -109,7 +1061,10 @@
           <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Sell Property</a>
           <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center gap-1">
             Services
-            <span class="text-[11px] translate-y-[1px]">⌄</span>
+            <img src="/static/images/arrow-down.svg"
+                 onerror="this.onerror=null;this.src='../../static/images/arrow-down.svg';"
+                 alt="" aria-hidden="true"
+                 class="w-[18px] h-[18px] opacity-70" />
           </a>
           <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Mortgage Calculator</a>
           <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">About</a>
@@ -128,163 +1083,872 @@
         </div>
       </header>
 
-      <!-- Hero -->
-      <section class="mt-8 bg-surface rounded-3xl p-6 md:p-10 grid md:grid-cols-2 gap-6 items-center">
-        <div>
-          <h1 class="text-3xl md:text-5xl font-bold leading-tight">
-            Buy, Sell &amp; Finance Property - 100% Digitally
-          </h1>
-          <p class="mt-4 text-secondaryText text-base md:text-lg leading-relaxed">
-            Search verified properties, get valuation and legal services, and secure mortgage financing without visiting a branch.
-          </p>
-          <div class="mt-6 grid sm:grid-cols-3 gap-3">
-            <input class="h-12 rounded-xl px-4 border border-borderDefault" placeholder="Enter location" />
-            <input class="h-12 rounded-xl px-4 border border-borderDefault" placeholder="Select size" />
-            <input class="h-12 rounded-xl px-4 border border-borderDefault" placeholder="Set budget" />
+      <!-- Navbar (Mobile, < 1024px) — Figma node 1:6046 -->
+      <header class="header-mobile" aria-label="Mobile header">
+        <!-- Menu button (node 1:6047) -->
+        <button type="button" id="mobileMenuOpen" class="header-mobile-icon-btn"
+                aria-label="Open menu" aria-controls="mobileMenuDrawer" aria-expanded="false">
+          <img src="/static/images/menu.svg"
+               onerror="this.onerror=null;this.src='../../static/images/menu.svg';"
+               alt="" aria-hidden="true" />
+        </button>
+
+        <!-- Logo (node 1:6049) -->
+        <div class="header-mobile-logo">
+          <img src="/static/images/Vector.svg"
+               onerror="this.onerror=null;this.src='../../static/images/Vector.svg';"
+               alt="Alfa"
+               class="header-mobile-alfa-img" />
+          <span class="header-mobile-gradient-text">Mortgage</span>
+        </div>
+
+        <!-- User account button (node 1:6052) -->
+        <button type="button" class="header-mobile-icon-btn" aria-label="Account">
+          <img src="/static/images/user.svg"
+               onerror="this.onerror=null;this.src='../../static/images/user.svg';"
+               alt="" aria-hidden="true" />
+        </button>
+      </header>
+
+      <!-- Mobile hamburger drawer — Figma 35:5383 panel + 35:5408 nav -->
+      <div id="mobileMenuOverlay" class="mobile-menu-overlay" aria-hidden="true"></div>
+      <aside id="mobileMenuDrawer" class="mobile-menu-drawer"
+             role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true">
+
+        <!-- Drawer header: logo + close -->
+        <div class="mobile-menu-header">
+          <div class="header-mobile-logo">
+            <img src="/static/images/Vector.svg"
+                 onerror="this.onerror=null;this.src='../../static/images/Vector.svg';"
+                 alt="Alfa"
+                 class="header-mobile-alfa-img" />
+            <span class="header-mobile-gradient-text">Mortgage</span>
           </div>
-          <button class="mt-4 h-12 px-6 rounded-xl text-white bg-gradient-to-r from-black via-[#D30248] via-[#D30202] to-[#D34802]">
-            Find Property To Buy
+          <button type="button" id="mobileMenuClose" class="header-mobile-icon-btn" aria-label="Close menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M18 6L6 18M6 6L18 18" stroke="#141519"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </button>
         </div>
-        <div class="flex justify-center">
-          <img
-            src="https://www.figma.com/api/mcp/asset/31da2e55-8d59-4a04-b5c3-b13684f7e1ec"
-            alt="Hero house"
-            class="w-full max-w-[520px] object-contain"
-          />
+
+        <!-- Nav links (Figma node 35:5408) -->
+        <nav class="mobile-menu-nav" aria-label="Mobile menu">
+          <a href="#" class="mobile-menu-link">Buy Property</a>
+          <a href="#" class="mobile-menu-link">Sell Property</a>
+
+          <!-- Services with submenu (node 35:5642) — collapsed by default -->
+          <div class="mobile-menu-services collapsed" id="mobileMenuServices">
+            <button type="button" class="mobile-menu-services-row"
+                    aria-expanded="false" aria-controls="mobileMenuSubmenu">
+              <span>Services</span>
+              <img src="/static/images/arrow-down.svg"
+                   onerror="this.onerror=null;this.src='../../static/images/arrow-down.svg';"
+                   alt="" aria-hidden="true" class="arrow-icon" />
+            </button>
+            <div class="mobile-menu-submenu" id="mobileMenuSubmenu">
+              <!-- Sub-item (node 35:5635) — invisible arrow keeps text aligned with the Services row above -->
+              <a href="#" class="mobile-menu-sub-item">
+                <span>Legal Opinion</span>
+                <span class="arrow-spacer" aria-hidden="true"></span>
+              </a>
+              <!-- Sub-item (node 35:5643) -->
+              <a href="#" class="mobile-menu-sub-item">
+                <span>Property Valuation Report</span>
+                <span class="arrow-spacer" aria-hidden="true"></span>
+              </a>
+            </div>
+          </div>
+
+          <a href="#" class="mobile-menu-link">Mortgage Calculator</a>
+          <a href="#" class="mobile-menu-link">About</a>
+        </nav>
+
+        <!-- Drawer footer CTA (Figma node 35:5426) -->
+        <div class="mobile-menu-footer">
+          <button type="button" class="mobile-menu-cta">Apply for Mortgage</button>
+        </div>
+      </aside>
+
+      <!-- Hero (responsive — desktop: Figma 1:4068 / mobile: Figma 1:5708) -->
+
+      <!-- Desktop hero (≥ 1024px) -->
+      <section class="hero-desktop hero-desktop-section">
+
+        <!-- Layer 1: Base surface colour -->
+        <div style="position:absolute; inset:0; background:#F2F2F4; border-radius:64px;"></div>
+
+        <!-- Layer 2: Background texture image at 25% opacity -->
+        <img src="/static/images/BackgroundImageProprtySearchImage.png"
+             onerror="this.onerror=null;this.src='../../static/images/BackgroundImageProprtySearchImage.png';"
+             alt="" aria-hidden="true"
+             style="position:absolute; inset:0; width:100%; height:100%; max-width:none; object-fit:cover; border-radius:64px; opacity:0.25; pointer-events:none;" />
+
+        <!-- Layer 3: Property image — left:639px, top:-49px, 754×754, transform: scaleY(-1) rotate(180deg) -->
+        <div style="position:absolute; left:639px; top:-49px; width:754px; height:754px; pointer-events:none;">
+          <div style="transform: scaleY(-1) rotate(180deg); width:754px; height:754px;">
+            <img src="/static/images/LandingPagePropertySearchImage.png"
+                 onerror="this.onerror=null;this.src='../../static/images/LandingPagePropertySearchImage.png';"
+                 alt=""
+                 style="width:754px; height:754px; max-width:none; object-fit:cover; display:block;" />
+          </div>
+        </div>
+
+        <!-- Layer 4: Content block — left:52px, top:244px, width:752px -->
+        <div style="position:absolute; left:52px; top:244px; width:752px; display:flex; flex-direction:column; gap:32px;">
+
+          <!-- Text -->
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <p style="width:663px; font-family:Tahoma,Arial,sans-serif; font-size:48px; font-weight:700; line-height:60px; letter-spacing:-0.4865px; color:#000;">
+              Buy, Sell &amp; Finance Property — 100% Digitally
+            </p>
+            <p style="width:579px; font-family:Tahoma,Arial,sans-serif; font-size:16px; font-weight:400; line-height:20px; letter-spacing:-0.4865px; color:#000;">
+              Search verified properties, get valuation &amp; legal services, and secure mortgage financing without visiting a branch.
+            </p>
+          </div>
+
+          <!-- Search pill -->
+          <div style="background:white; display:inline-flex; align-items:center; border-radius:99px; box-shadow:0px 4px 12px rgba(0,0,0,0.04);">
+            <!-- Where -->
+            <div style="display:flex; flex-direction:column; gap:4px; padding:18px 54px; width:224px; white-space:nowrap;">
+              <span style="font-family:Tahoma,sans-serif; font-size:16px; font-weight:400; line-height:24px; letter-spacing:-0.5px; color:#000;">Where</span>
+              <span style="font-family:Tahoma,sans-serif; font-size:20px; font-weight:400; line-height:24px; letter-spacing:-0.5px; color:#5D5D5D;">Enter location</span>
+            </div>
+            <!-- Area -->
+            <div style="display:flex; flex-direction:column; gap:4px; padding:18px 54px; width:224px; white-space:nowrap; border-left:1px solid #F2F2F4; border-right:1px solid #F2F2F4;">
+              <span style="font-family:Tahoma,sans-serif; font-size:16px; font-weight:400; line-height:24px; letter-spacing:-0.5px; color:#000;">Area</span>
+              <span style="font-family:Tahoma,sans-serif; font-size:20px; font-weight:400; line-height:24px; letter-spacing:-0.5px; color:#5D5D5D;">Select size</span>
+            </div>
+            <!-- Budget -->
+            <div style="display:flex; flex-direction:column; gap:4px; padding:18px 54px; width:224px; white-space:nowrap;">
+              <span style="font-family:Tahoma,sans-serif; font-size:16px; font-weight:400; line-height:24px; letter-spacing:-0.5px; color:#000;">Budget</span>
+              <span style="font-family:Tahoma,sans-serif; font-size:20px; font-weight:400; line-height:24px; letter-spacing:-0.5px; color:#5D5D5D;">Set budget</span>
+            </div>
+            <!-- Buttons -->
+            <div style="display:flex; align-items:center; gap:8px; padding-right:24px;">
+              <!-- Filter -->
+              <button style="background:#F2F2F4; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:16px; border-radius:29.19px; flex-shrink:0;">
+                <img src="/static/images/setting-4.svg"
+                     onerror="this.onerror=null;this.src='../../static/images/setting-4.svg';"
+                     alt="Filter"
+                     style="display:block; width:24px; height:24px; flex-shrink:0;" />
+              </button>
+              <!-- Search -->
+              <button style="background:#DA291C; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:16px; border-radius:29.19px;">
+                <img src="/static/images/search2.svg"
+                     onerror="this.onerror=null;this.src='../../static/images/search2.svg';"
+                     alt="Search"
+                     style="display:block; width:24px; height:24px; flex-shrink:0; filter:brightness(0) invert(1);" />
+              </button>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <!-- Quick actions -->
-      <section class="mt-20 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="quickActions"></section>
+      <!-- Mobile / tablet hero (< 1024px) — Figma node 1:5708 -->
+      <section class="hero-mobile" aria-label="Hero">
 
-      <!-- Featured properties -->
+        <!-- Top card with title + hand+house image (node 1:5709) -->
+        <div class="hero-mobile-card">
+          <div class="hero-mobile-text">
+            <p class="hero-mobile-title">Buy, Sell &amp; Finance<br />Property — 100% Digitally</p>
+            <p class="hero-mobile-subtitle">
+              Search verified properties, get valuation &amp; legal services, and secure mortgage financing without visiting a branch.
+            </p>
+          </div>
+          <div class="hero-mobile-image-wrap" aria-hidden="true">
+            <img src="/static/images/LandingPagePropertySearchImage.png"
+                 onerror="this.onerror=null;this.src='../../static/images/LandingPagePropertySearchImage.png';"
+                 alt="" />
+          </div>
+        </div>
+
+        <!-- Stacked search card (node 1:5714) -->
+        <div class="hero-mobile-search" data-node-id="1:5714">
+          <!-- Where (node 1:5715) -->
+          <div class="hero-mobile-field" data-node-id="1:5715">
+            <p class="hero-mobile-field-label" data-node-id="1:5716">Where</p>
+            <p class="hero-mobile-field-value" data-node-id="1:5717">Enter location</p>
+          </div>
+          <!-- Area (node 1:5718) -->
+          <div class="hero-mobile-field hero-mobile-field--bordered" data-node-id="1:5718">
+            <p class="hero-mobile-field-label" data-node-id="1:5719">Area</p>
+            <p class="hero-mobile-field-value" data-node-id="1:5720">Select size</p>
+          </div>
+          <!-- Budget (node 1:5721) -->
+          <div class="hero-mobile-field" data-node-id="1:5721">
+            <p class="hero-mobile-field-label" data-node-id="1:5722">Budget</p>
+            <p class="hero-mobile-field-value" data-node-id="1:5723">Set budget</p>
+          </div>
+          <!-- Search row (node 1:5724) -->
+          <div class="hero-mobile-search-row" data-node-id="1:5724">
+            <button type="button" class="hero-mobile-filter-btn" aria-label="Filters" data-node-id="35:6034">
+              <img src="/static/images/setting-4.svg"
+                   onerror="this.onerror=null;this.src='../../static/images/setting-4.svg';"
+                   alt="" aria-hidden="true" />
+            </button>
+            <button type="button" class="hero-mobile-search-btn" data-node-id="1:5725">
+              <p data-node-id="1:5726">Find Property To Buy</p>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Quick actions — Figma node 1:5727 (mobile 2-col / desktop 4-col) -->
+      <section class="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6" id="quickActions"></section>
+
+      <!-- Featured properties — Figma node 1:4182 -->
       <section class="mt-20">
+        <!-- Header row (node 1:4252) -->
         <div class="flex items-center justify-between gap-4">
-          <h2 class="text-2xl md:text-3xl font-bold">Featured Properties</h2>
-          <button class="text-brand font-semibold">View All Properties</button>
+          <h2 class="font-tahoma text-[25px] leading-[31px] text-black font-normal">Featured Properties</h2>
+          <button class="hidden lg:inline-flex items-center justify-center gap-2 px-4 py-3 rounded-[12px] text-white font-tahoma text-[16px] leading-6 font-normal shrink-0"
+                  style="background: linear-gradient(28.35deg, #000 0%, #D30248 27.15%, #D30202 54.3%, #D34802 67.88%);">
+            View All Properties
+            <img src="/static/images/arrow-down-white.svg"
+                 onerror="this.onerror=null;this.src='../../static/images/arrow-down-white.svg';"
+                 alt="" aria-hidden="true"
+                 class="w-6 h-6"
+                 style="transform: rotate(-90deg); flex-shrink:0;" />
+          </button>
         </div>
-        <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="featuredGrid"></div>
+        <!-- Horizontal scrollable cards row (node 1:4144 — gap 24px) -->
+        <div class="mt-7 flex gap-6 items-center overflow-x-auto pb-6"
+             id="featuredGrid"
+             role="region"
+             aria-label="Featured properties carousel"
+             tabindex="0"></div>
+        <!-- Mobile pagination dots (Figma node 1:5763 carousel indicator) -->
+        <div class="featured-dots" id="featuredDots" role="tablist" aria-label="Featured properties pagination"></div>
       </section>
 
-      <!-- Services -->
-      <section class="mt-20 grid lg:grid-cols-2 gap-6">
-        <article class="rounded-3xl bg-surface p-8 text-center">
-          <div class="mx-auto w-24 h-24 rounded-full bg-white shadow-card flex items-center justify-center text-3xl">%</div>
-          <h3 class="mt-6 text-2xl font-bold">Property Valuation</h3>
-          <p class="mt-3 text-secondaryText max-w-[540px] mx-auto">
-            Search verified properties, get valuation and legal services, and secure mortgage financing without visiting a branch.
+      <!-- Agent CTA Banner — "Are you a real estate agent?" (Figma node 1:4227 desktop / 1:5788 mobile) -->
+      <section class="agent-cta-section">
+
+        <!-- Background photo: real estate agent (locally downloaded) -->
+        <img src="/static/images/agent-banner-bg.png"
+             onerror="this.onerror=null;this.src='../../static/images/agent-banner-bg.png';"
+             alt="" aria-hidden="true"
+             class="agent-cta-bg-image" />
+
+        <!-- Radial gradient overlay matching Figma (dark vignette from left) -->
+        <div aria-hidden="true" class="agent-cta-overlay"></div>
+
+        <!-- Content -->
+        <div class="agent-cta-content">
+          <h2 class="agent-cta-title">Are you a real estate agent?</h2>
+          <p class="agent-cta-subtitle">
+            Partner with Alfa Mortgage to grow your business and reach more clients digitally.
           </p>
-          <button class="mt-6 text-brand font-semibold">Request Property Valuation</button>
+          <div>
+            <button type="button" class="agent-cta-btn">
+              Partner with Alfa Mortgage
+              <img src="/static/images/arrow-down-white.svg"
+                   onerror="this.onerror=null;this.src='../../static/images/arrow-down-white.svg';"
+                   alt="" aria-hidden="true"
+                   style="width:24px; height:24px; transform:rotate(-90deg); flex-shrink:0;" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Properties in Karachi — Figma node 1:4275 -->
+      <section class="mt-20" id="propertiesKarachiSection">
+        <!-- Header row (node 1:4276) -->
+        <div class="flex items-center justify-between gap-4">
+          <h2 class="karachi-section-title font-tahoma text-[25px] leading-[31px] text-black font-normal">Properties in Karachi</h2>
+          <a href="#"
+             class="inline-flex items-center gap-1 font-tahoma text-[16px] leading-6 whitespace-nowrap"
+             style="color:#d34802; text-decoration:none;">
+            <span class="karachi-view-all-text">View All Properties</span>
+            <img src="/static/images/arrow-down-orange.svg"
+                 onerror="this.onerror=null;this.src='../../static/images/arrow-down-orange.svg';"
+                 alt="" aria-hidden="true"
+                 class="services-card-cta-icon" />
+          </a>
+        </div>
+
+        <!-- Two-row grid of property cards (8 total) — node 1:4358 / 1:4536 -->
+        <div class="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+             id="karachiPropertiesGrid"></div>
+      </section>
+
+      <!-- How Alfa Mortgage Application Process Works — Figma node 1:4791 -->
+      <section class="mt-20" id="processWorksSection">
+        <!-- Heading block (node 1:4733) -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center;">
+          <p style="font-family:Tahoma,Arial,sans-serif; font-size:16px; font-weight:400; line-height:20px; letter-spacing:-0.4865px; color:#da291c; margin:0; max-width:579px;">
+            How Alfa Mortgage Application Process Works
+          </p>
+          <p style="font-family:Tahoma,Arial,sans-serif; font-size:24px; line-height:40px; letter-spacing:-0.4865px; color:#141519; margin:0; max-width:579px; text-align:center;">
+            <span style="font-family:Tahoma,Arial,sans-serif; font-weight:700;">Alfa Mortgage</span><span style="font-family:Tahoma,Arial,sans-serif; font-weight:400;"> offers hassle-free smooth mortgage process</span>
+          </p>
+        </div>
+
+        <!-- Steps row (node 1:4790) — 5 circles + 4 arrows -->
+        <div id="processStepsContainer"
+             style="margin-top:66px; display:flex; align-items:flex-start; justify-content:center; gap:8px; flex-wrap:wrap;"></div>
+      </section>
+
+      <!-- Services — Figma node 1:6162 (surface) / 12:774 (content) -->
+      <section class="mt-20 grid lg:grid-cols-2 gap-6" id="servicesSection">
+        <!-- Property Valuation Card -->
+        <article class="services-card">
+          <!-- Top: Icon + Text (node 12:773) -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:25px; width:100%;">
+            <!-- Icon circle (node 12:2452 / 1:6166) -->
+            <div class="services-card-icon-circle">
+              <div class="services-card-icon-bg"></div>
+              <div class="services-card-icon-wrap">
+                <img src="https://www.figma.com/api/mcp/asset/3dad0a55-2060-44db-bd13-3d4032eed0b7"
+                     onerror="this.onerror=null;this.src='/static/images/setting-4.jpg';"
+                     alt="" aria-hidden="true"
+                     class="services-card-icon" />
+              </div>
+            </div>
+            <!-- Text block (node 12:772) -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:25px;
+                        text-align:center; width:100%;">
+              <h3 class="services-card-title">Property Valuation</h3>
+              <p class="services-card-desc">
+                Search verified properties, get valuation &amp; legal services, and secure mortgage financing without visiting a branch.
+              </p>
+            </div>
+          </div>
+          <!-- CTA link (node 19:1544) -->
+          <a href="#" class="services-card-cta">
+            Request Property Valuation
+            <img src="/static/images/arrow-down-orange.svg"
+                 onerror="this.onerror=null;this.src='../../static/images/arrow-down-orange.svg';"
+                 alt="" aria-hidden="true"
+                 class="services-card-cta-icon" />
+          </a>
         </article>
-        <article class="rounded-3xl bg-surface p-8 text-center">
-          <div class="mx-auto w-24 h-24 rounded-full bg-white shadow-card flex items-center justify-center text-3xl">L</div>
-          <h3 class="mt-6 text-2xl font-bold">Legal Opinion</h3>
-          <p class="mt-3 text-secondaryText max-w-[540px] mx-auto">
-            Search verified properties, get valuation and legal services, and secure mortgage financing without visiting a branch.
-          </p>
-          <button class="mt-6 text-brand font-semibold">Request Legal Opinion</button>
+
+        <!-- Legal Opinion Card -->
+        <article class="services-card">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:25px; width:100%;">
+            <div class="services-card-icon-circle">
+              <div class="services-card-icon-bg"></div>
+              <div class="services-card-icon-wrap">
+                <img src="https://www.figma.com/api/mcp/asset/3dad0a55-2060-44db-bd13-3d4032eed0b7"
+                     onerror="this.onerror=null;this.src='/static/images/setting-4.jpg';"
+                     alt="" aria-hidden="true"
+                     class="services-card-icon" />
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:25px;
+                        text-align:center; width:100%;">
+              <h3 class="services-card-title">Legal Opinion</h3>
+              <p class="services-card-desc">
+                Search verified properties, get valuation &amp; legal services, and secure mortgage financing without visiting a branch.
+              </p>
+            </div>
+          </div>
+          <a href="#" class="services-card-cta">
+            Request Legal Opinion
+            <img src="/static/images/arrow-down-orange.svg"
+                 onerror="this.onerror=null;this.src='../../static/images/arrow-down-orange.svg';"
+                 alt="" aria-hidden="true"
+                 class="services-card-cta-icon" />
+          </a>
         </article>
       </section>
     </div>
 
-    <!-- Footer -->
-    <footer class="mt-20 bg-surface/70 border-t border-borderDefault">
-      <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-12 grid lg:grid-cols-[1.2fr_2fr] gap-10">
-        <div>
-          <div class="brand-logo">
-            <img src="{% static 'images/Vector.svg' %}" alt="Alfa" class="brand-alfa-img" />
-            <span class="logo-gradient-text">Mortgage</span>
+    <!-- Footer — Figma node 1:6199 -->
+    <footer class="site-footer mt-20">
+      <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-12">
+        <div class="footer-content">
+          <!-- Logo column (node 1:6200) -->
+          <div class="footer-logo-col">
+            <!-- Logo (node 1:6629) -->
+            <div class="footer-logo-row">
+              <img src="/static/images/Vector.svg"
+                   onerror="this.onerror=null;this.src='../../static/images/Vector.svg';"
+                   alt="Alfa"
+                   class="footer-alfa-img" />
+              <span class="footer-logo-gradient-text">Mortgage</span>
+            </div>
+
+            <!-- Description + Socials (node 1:6202) -->
+            <div class="footer-logo-content">
+              <p class="footer-description">
+                The purpose of a FAQ is generally to provide information on frequent questions or concerns.
+              </p>
+
+              <!-- Social icons (node 1:6205) -->
+              <div class="footer-socials">
+                <a href="#" class="footer-social-badge" aria-label="LinkedIn">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                  </svg>
+                </a>
+                <a href="#" class="footer-social-badge" aria-label="X (Twitter)">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
-          <p class="mt-4 text-secondaryText max-w-sm">
-            The purpose of a FAQ is generally to provide information on frequent questions or concerns.
-          </p>
-          <div class="mt-6 flex gap-3">
-            <span class="w-10 h-10 rounded-full bg-white border border-borderDefault grid place-content-center">in</span>
-            <span class="w-10 h-10 rounded-full bg-white border border-borderDefault grid place-content-center">x</span>
-          </div>
-        </div>
-        <div class="grid sm:grid-cols-3 gap-8 text-[15px]">
-          <div>
-            <h5 class="font-bold mb-4">Alfa Mortgage</h5>
-            <ul class="space-y-3 text-secondaryText">
-              <li>About us</li>
-              <li>Agency profile</li>
-              <li>FAQ</li>
-            </ul>
-          </div>
-          <div>
-            <h5 class="font-bold mb-4">Tools &amp; resources</h5>
-            <ul class="space-y-3 text-secondaryText">
-              <li>Property Valuation</li>
-              <li>Financing Calculator</li>
-              <li>Guides &amp; Articles</li>
-            </ul>
-          </div>
-          <div>
-            <h5 class="font-bold mb-4">Legal</h5>
-            <ul class="space-y-3 text-secondaryText">
-              <li>Terms of Service</li>
-              <li>Privacy Policy / GDPR</li>
-              <li>Cookie Policy</li>
-            </ul>
-          </div>
+
+          <!-- Link columns (node 1:6219) -->
+          <nav class="footer-link-cols" aria-label="Footer">
+            <!-- Alfa Mortgage (node 1:6220) -->
+            <div class="footer-link-col">
+              <h5 class="footer-col-heading">Alfa Mortgage</h5>
+              <ul class="footer-col-list">
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Agency profile</a></li>
+                <li><a href="#">FAQ</a></li>
+              </ul>
+            </div>
+            <!-- Tools & resources (node 1:6226) -->
+            <div class="footer-link-col">
+              <h5 class="footer-col-heading">Tools &amp; resources</h5>
+              <ul class="footer-col-list">
+                <li><a href="#">Property Valuation</a></li>
+                <li><a href="#">Financing Calculator</a></li>
+                <li><a href="#">Guides &amp; Articles</a></li>
+              </ul>
+            </div>
+            <!-- Legal (node 1:6232) -->
+            <div class="footer-link-col">
+              <h5 class="footer-col-heading">Legal</h5>
+              <ul class="footer-col-list">
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Privacy Policy / GDPR</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+              </ul>
+            </div>
+          </nav>
         </div>
       </div>
-      <div class="border-t border-borderDefault py-4 text-center text-sm text-secondaryText">
+      <div class="footer-bottom-bar">
         ©Transparent 2024. All rights reserved
       </div>
     </footer>
 
     <script>
+      // ---------- Mobile hamburger drawer (Figma 35:5383 + 35:5408) ----------
+      (function initMobileMenu() {
+        const openBtn  = document.getElementById("mobileMenuOpen");
+        const closeBtn = document.getElementById("mobileMenuClose");
+        const drawer   = document.getElementById("mobileMenuDrawer");
+        const overlay  = document.getElementById("mobileMenuOverlay");
+        const services       = document.getElementById("mobileMenuServices");
+        const servicesRow    = services && services.querySelector(".mobile-menu-services-row");
+
+        if (!openBtn || !closeBtn || !drawer || !overlay) return;
+
+        function openMenu() {
+          drawer.classList.add("open");
+          overlay.classList.add("open");
+          drawer.setAttribute("aria-hidden", "false");
+          overlay.setAttribute("aria-hidden", "false");
+          openBtn.setAttribute("aria-expanded", "true");
+          document.body.classList.add("menu-open");
+        }
+        function closeMenu() {
+          drawer.classList.remove("open");
+          overlay.classList.remove("open");
+          drawer.setAttribute("aria-hidden", "true");
+          overlay.setAttribute("aria-hidden", "true");
+          openBtn.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("menu-open");
+        }
+
+        openBtn.addEventListener("click", openMenu);
+        closeBtn.addEventListener("click", closeMenu);
+        overlay.addEventListener("click", closeMenu);
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && drawer.classList.contains("open")) closeMenu();
+        });
+
+        // Tapping any nav link closes the drawer
+        drawer.querySelectorAll(".mobile-menu-link, .mobile-menu-sub-item")
+              .forEach((link) => link.addEventListener("click", closeMenu));
+
+        // Services submenu toggle
+        if (servicesRow && services) {
+          servicesRow.addEventListener("click", () => {
+            const collapsed = services.classList.toggle("collapsed");
+            servicesRow.setAttribute("aria-expanded", String(!collapsed));
+          });
+        }
+      })();
+
       const quickActions = [
-        { title: "Buy Property", icon: "https://www.figma.com/api/mcp/asset/9b8019e1-8ebf-43da-93b0-23de4a193510" },
-        { title: "Sell Property", icon: "https://www.figma.com/api/mcp/asset/35448619-ab07-45a3-89a1-ed755b3d4221" },
-        { title: "Apply for Mortgage", icon: "https://www.figma.com/api/mcp/asset/d2affa14-f61d-4da3-a295-c47aad907fac" },
-        { title: "Mortgage Calculator", icon: "https://www.figma.com/api/mcp/asset/2b20d4cf-5d44-4f3e-ac82-d77a0ef208f2" },
+        {
+          title: "Buy Property",
+          icon: "/static/images/icon-bank.svg",
+          iconFallback: "../../static/images/icon-bank.svg",
+        },
+        {
+          title: "Sell Property",
+          icon: "/static/images/user.svg",
+          iconFallback: "../../static/images/user.svg",
+        },
+        {
+          title: "Apply for Mortgage",
+          icon: "/static/images/icon-tick-circle.svg",
+          iconFallback: "../../static/images/icon-tick-circle.svg",
+        },
+        {
+          title: "Mortgage Calculator",
+          icon: "/static/images/icon-percentage-square.svg",
+          iconFallback: "../../static/images/icon-percentage-square.svg",
+        },
       ];
 
-      const featured = new Array(4).fill(0).map((_, i) => ({
-        title: i % 2 === 0 ? "Modern family house in Karachi" : "Luxury villa with sea-facing view",
-        location: "DHA Phase 6, Karachi",
-        price: i % 2 === 0 ? "PKR 7.5 Crore" : "PKR 11.2 Crore",
-        size: "430 m²",
-        image: "https://www.figma.com/api/mcp/asset/31da2e55-8d59-4a04-b5c3-b13684f7e1ec",
+      const featuredImage = "/static/images/property1.jfif";
+      const featuredImageFallback = "../../static/images/property1.jfif";
+      const featured = Array.from({ length: 6 }, () => ({
+        title: "Halari Memon Society",
+        location: "1245 Ocean Drive, Miami Beach, FL 33139",
+        price: "PKR 12,000,000",
+        monthly: "Or PKR 50,000/month*",
+        type: "House",
+        image: featuredImage,
+        beds: 9,
+        baths: 5,
+        floors: 3,
+        area: "430 m²",
       }));
 
       const quickContainer = document.getElementById("quickActions");
       quickActions.forEach((item) => {
         const card = document.createElement("button");
         card.className =
-          "h-36 rounded-2xl border border-borderDefault bg-white px-4 py-5 flex flex-col justify-between text-left hover:shadow-card transition";
+          "h-36 rounded-2xl border border-borderDefault bg-white px-3 py-6 lg:px-4 lg:py-5 flex flex-col justify-between text-left hover:shadow-card transition";
         card.innerHTML = `
           <div class="flex items-start justify-between">
             <span class="w-[59px] h-[59px] rounded-full bg-surface flex items-center justify-center">
-              <img src="${item.icon}" alt="" class="w-6 h-6" />
+              <img src="${item.icon}"
+                   onerror="this.onerror=null;this.src='${item.iconFallback}';"
+                   alt="" class="w-6 h-6" />
             </span>
-            <span class="text-2xl rotate-45">↑</span>
+            <span class="text-2xl rotate-45 leading-none">↑</span>
           </div>
-          <span class="text-[22px]">${item.title}</span>
+          <span class="text-[16px] leading-5 tracking-[-0.486px] lg:text-[22px] lg:leading-7 lg:tracking-normal">${item.title}</span>
         `;
         quickContainer.appendChild(card);
       });
 
       const featuredContainer = document.getElementById("featuredGrid");
+      const featuredCardWidth = 262;
+      const featuredInfoPanelWidth = 244;
+      const featuredInfoInnerWidth = 222;
+
+      const infoBadge = (iconSrc, value) => `
+        <span class="flex items-center justify-center gap-1"
+              style="padding:4px 8px;
+                     border-radius:20px;
+                     backdrop-filter:blur(22px);
+                     -webkit-backdrop-filter:blur(22px);
+                     background:rgba(0,0,0,0.55);
+                     box-shadow:0 4px 4px 0 rgba(0,0,0,0.1);
+                     flex-shrink:0;">
+          <img src="${iconSrc}"
+               alt="" aria-hidden="true"
+               style="width:11.5px; height:11.5px; display:block; filter:brightness(0) invert(1);" />
+          <span class="font-tahoma font-normal text-white whitespace-nowrap"
+                style="font-size:8px; line-height:normal;">${value}</span>
+        </span>
+      `;
+
       featured.forEach((item) => {
-        const card = document.createElement("article");
-        card.className = "rounded-2xl border border-borderDefault overflow-hidden bg-white";
+        const card = document.createElement("div");
+        card.className = "featured-card relative flex flex-col items-center shrink-0";
+        card.style.width = `${featuredCardWidth}px`;
         card.innerHTML = `
-          <div class="h-56 bg-surface">
-            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" />
+          <!-- Property image (node 1:4108 — h:381 / mb:-72 / radius:19.125) -->
+          <div class="w-full relative shrink-0 overflow-hidden"
+               style="height:381px; margin-bottom:-72px; border-radius:19.125px;">
+            <img src="${item.image}"
+                 onerror="this.onerror=null;this.src='${featuredImageFallback}';"
+                 alt="${item.title}"
+                 class="absolute inset-0 w-full h-full object-cover max-w-none pointer-events-none"
+                 style="border-radius:19.125px;" />
           </div>
-          <div class="p-4">
-            <p class="text-sm text-secondaryText">${item.location}</p>
-            <h3 class="mt-1 font-semibold text-lg leading-snug">${item.title}</h3>
-            <p class="mt-2 text-brand font-bold">${item.price}</p>
-            <p class="mt-1 text-sm text-secondaryText">Size: ${item.size}</p>
+          <!-- Glass info panel (node 1:4109 — w:244 / px:11 / py:15 / radius:20 / blur:22) -->
+          <div class="relative flex flex-col items-start shrink-0"
+               style="width:${featuredInfoPanelWidth}px;
+                      padding:15px 11px;
+                      border-radius:20px;
+                      backdrop-filter:blur(22px);
+                      -webkit-backdrop-filter:blur(22px);
+                      background:rgba(121,47,9,0.25);
+                      box-shadow:0px 4px 4px 0px rgba(0,0,0,0.1);">
+            <!-- Inner text wrapper (node 1:4110 — w:222 / gap:12 / overflow-clip) -->
+            <div class="flex flex-col items-start shrink-0 overflow-hidden"
+                 style="width:${featuredInfoInnerWidth}px; gap:12px;">
+              <!-- Title + location (node 1:4111 — gap:4) -->
+              <div class="flex flex-col items-start shrink-0 w-full" style="gap:4px;">
+                <p class="font-tahoma font-normal text-white w-full"
+                   style="font-size:12px; line-height:normal; height:16.256px;">${item.title}</p>
+                <p class="font-tahoma font-normal text-white w-full"
+                   style="font-size:10px; line-height:normal; height:14.344px;">${item.location}</p>
+              </div>
+              <!-- Price + monthly (node 1:4114 — gap:4) -->
+              <div class="flex flex-col items-start shrink-0 w-full" style="gap:4px;">
+                <p class="font-tahoma font-bold text-white w-full"
+                   style="font-size:18.169px; line-height:normal;">${item.price}</p>
+                <p class="font-tahoma font-normal text-white w-full"
+                   style="font-size:10px; line-height:normal; height:14.344px;">${item.monthly}</p>
+              </div>
+            </div>
           </div>
+          <!-- Info badges row (Figma node 1:6421 — top:16.97 / left:9 / w:184) — mobile only -->
+          <div class="feat-info-badges absolute items-center justify-between"
+               style="top:16.97px; left:9px; width:184px;">
+            ${infoBadge('/static/images/icon-bed.svg', item.beds)}
+            ${infoBadge('/static/images/icon-bath.svg', item.baths)}
+            ${infoBadge('/static/images/icon-floor.svg', item.floors)}
+            ${infoBadge('/static/images/icon-area.svg', item.area)}
+          </div>
+          <!-- Type badge (node 1:4117 — top:17 / left:9 / px:9.563 / py:7.65 / radius:28.688) — desktop only -->
+          <span class="feat-house-badge absolute bg-white items-center justify-center font-tahoma font-normal text-black whitespace-nowrap"
+                style="top:17px; left:9px;
+                       padding:7.65px 9.563px;
+                       border-radius:28.688px;
+                       font-size:11.475px; line-height:normal;">${item.type}</span>
         `;
         featuredContainer.appendChild(card);
+      });
+
+      /* ---------- Featured carousel: pagination dots + scroll sync (mobile) ---------- */
+      (function setupFeaturedCarousel() {
+        const grid = document.getElementById("featuredGrid");
+        const dotsContainer = document.getElementById("featuredDots");
+        if (!grid || !dotsContainer) return;
+
+        const cards = Array.from(grid.querySelectorAll(".featured-card"));
+        if (cards.length === 0) return;
+
+        cards.forEach((_, i) => {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "featured-dot" + (i === 0 ? " active" : "");
+          dot.setAttribute("role", "tab");
+          dot.setAttribute("aria-label", `Go to property ${i + 1}`);
+          dot.addEventListener("click", () => {
+            const target = cards[i];
+            const offset = target.offsetLeft - (grid.clientWidth - target.clientWidth) / 2;
+            grid.scrollTo({ left: Math.max(0, offset), behavior: "smooth" });
+          });
+          dotsContainer.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsContainer.querySelectorAll(".featured-dot"));
+
+        const setActive = (idx) => {
+          dots.forEach((d, j) => d.classList.toggle("active", j === idx));
+        };
+
+        let scrollRaf = 0;
+        grid.addEventListener("scroll", () => {
+          if (scrollRaf) return;
+          scrollRaf = requestAnimationFrame(() => {
+            scrollRaf = 0;
+            const center = grid.scrollLeft + grid.clientWidth / 2;
+            let bestIdx = 0;
+            let bestDist = Infinity;
+            cards.forEach((c, i) => {
+              const cardCenter = c.offsetLeft + c.clientWidth / 2;
+              const dist = Math.abs(cardCenter - center);
+              if (dist < bestDist) {
+                bestDist = dist;
+                bestIdx = i;
+              }
+            });
+            setActive(bestIdx);
+          });
+        }, { passive: true });
+      })();
+
+      const karachiUnique = [
+        {
+          title: "Halari Memon Society",
+          location: "1245 Ocean Drive, Miami Beach, FL 33139",
+          price: "PKR 12,000,000",
+          type: "House",
+          image: "/static/images/prop-karachi-1.png",
+          imageFallback: "../../static/images/prop-karachi-1.png",
+          beds: "9", floors: "3", baths: "5", area: "430 m²",
+        },
+        {
+          title: "Karachi Bar Society Secter 25A",
+          location: "1245 Ocean Drive, Miami Beach, FL 33139",
+          price: "PKR 12,000,000",
+          type: "Apartment",
+          image: "/static/images/prop-karachi-2.png",
+          imageFallback: "../../static/images/prop-karachi-2.png",
+          beds: "9", floors: "3", baths: "5", area: "430 m²",
+        },
+        {
+          title: "GULISTAN E JOHAR, BLOCK 16",
+          location: "1245 Ocean Drive, Miami Beach, FL 33139",
+          price: "PKR 12,000,000",
+          type: "Apartment",
+          image: "/static/images/prop-karachi-3.png",
+          imageFallback: "../../static/images/prop-karachi-3.png",
+          beds: "9", floors: "3", baths: "5", area: "430 m²",
+        },
+        {
+          title: "GULISHAN E IQBAL, BLOCK 13D",
+          location: "1245 Ocean Drive, Miami Beach, FL 33139",
+          price: "PKR 12,000,000",
+          type: "House",
+          image: "/static/images/prop-karachi-4.png",
+          imageFallback: "../../static/images/prop-karachi-4.png",
+          beds: "9", floors: "3", baths: "5", area: "430 m²",
+        },
+      ];
+
+      const karachiProperties = [...karachiUnique, ...karachiUnique];
+
+      const statPill = (iconSrc, iconFallback, value, wide) => `
+        <div style="display:inline-flex; align-items:center; height:24.862px; padding:0 10px 0 0;
+                    background:#f8f8f8; border:0.956px solid #eaeaea; border-radius:28.688px;
+                    flex-shrink:0; min-width:${wide ? "76.5px" : "44.944px"};">
+          <span style="display:inline-flex; align-items:center; justify-content:center;
+                       width:24.862px; height:24.862px; border-radius:9999px;
+                       background:#fff; border:0.956px solid #eaeaea; flex-shrink:0;">
+            <img src="${iconSrc}"
+                 onerror="this.onerror=null;this.src='${iconFallback}';"
+                 alt="" aria-hidden="true"
+                 style="width:11.475px; height:11.475px; object-fit:contain; display:block;" />
+          </span>
+          <span style="font-family:Tahoma,Arial,sans-serif; font-size:11.475px; line-height:normal;
+                       color:#1f1f1f; padding-left:6px; white-space:nowrap;">${value}</span>
+        </div>
+      `;
+
+      const karachiContainer = document.getElementById("karachiPropertiesGrid");
+      karachiProperties.forEach((p) => {
+        const card = document.createElement("article");
+        card.className = "karachi-property-card bg-white shrink-0 mx-auto";
+        card.style.cssText = `
+          display:flex; flex-direction:column; align-items:center; justify-content:center;
+          gap:15.3px; padding:11.475px;
+          border:0.956px solid #eaeaea; border-radius:28.688px;
+          width:100%; max-width:283.05px;
+        `;
+        card.innerHTML = `
+          <!-- Inner column: image + text -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:14.344px; width:100%;">
+            <!-- Image with type badge -->
+            <div style="position:relative; width:100%; height:210.375px; border-radius:19.125px; overflow:hidden;">
+              <img src="${p.image}"
+                   onerror="this.onerror=null;this.src='${p.imageFallback}';"
+                   alt="${p.title}"
+                   style="position:absolute; inset:0; width:100%; height:100%; max-width:none; object-fit:cover; pointer-events:none; border-radius:19.125px;" />
+              <span style="position:absolute; left:19.13px; top:18.17px;
+                           display:inline-flex; align-items:center; justify-content:center;
+                           padding:7.65px 9.563px; background:#fff; border-radius:28.688px;
+                           font-family:Tahoma,Arial,sans-serif; font-size:11.475px; line-height:normal;
+                           color:#000; white-space:nowrap;">${p.type}</span>
+            </div>
+            <!-- Text block -->
+            <div style="display:flex; flex-direction:column; align-items:flex-start; gap:7.65px; width:100%; overflow:hidden;">
+              <div style="display:flex; flex-direction:column; align-items:flex-start; gap:5.738px; width:100%;">
+                <p style="font-family:Tahoma,Arial,sans-serif; font-weight:700; font-size:13.387px; line-height:normal; color:#1f1f1f; margin:0; width:100%;">${p.title}</p>
+                <p style="font-family:Tahoma,Arial,sans-serif; font-weight:400; font-size:11.475px; line-height:normal; color:#a5a5a5; margin:0; width:100%;">${p.location}</p>
+              </div>
+              <p style="font-family:Tahoma,Arial,sans-serif; font-weight:700; font-size:18.169px; line-height:normal; color:#1f1f1f; margin:0; width:100%;">${p.price}</p>
+            </div>
+          </div>
+          <!-- Stats row -->
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; width:100%;">
+            ${statPill("/static/images/icon-bed.svg",   "../../static/images/icon-bed.svg",   p.beds,   false)}
+            ${statPill("/static/images/icon-floor.svg", "../../static/images/icon-floor.svg", p.floors, false)}
+            ${statPill("/static/images/icon-bath.svg",  "../../static/images/icon-bath.svg",  p.baths,  false)}
+            ${statPill("/static/images/icon-area.svg",  "../../static/images/icon-area.svg",  p.area,   true)}
+          </div>
+        `;
+        karachiContainer.appendChild(card);
+      });
+
+      // ---------- How Alfa Mortgage Application Process Works (node 1:4790) ----------
+      const processSteps = [
+        { number: 1, title: "Apply Online",      description: "Fill the digital application form in minutes" },
+        { number: 2, title: "Get Pre-Approval",  description: "Receive instant eligibility & loan estimate" },
+        { number: 3, title: "Property Valuation", description: "We arrange valuation & legal verification" },
+        { number: 4, title: "Document Signing",  description: "Sign loan documents securely from anywhere" },
+        { number: 5, title: "Disbursement",      description: "Funds are disbursed directly for purchase" },
+      ];
+
+      const processIconSrc      = "https://www.figma.com/api/mcp/asset/3c79d78e-a2a1-46a6-b0d8-353b37ff345c";
+      const processIconFallback = "/static/images/setting-4.jpg";
+
+      // Inline SVG arrow keeps the design intact without depending on the Figma CDN
+      const arrowSvg = `
+        <svg width="48" height="8" viewBox="0 0 48 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0 4H46" stroke="#1F1F1F" stroke-width="0.75"/>
+          <path d="M40 0L47 4L40 8" stroke="#1F1F1F" stroke-width="0.75" fill="none" stroke-linejoin="miter"/>
+        </svg>
+      `;
+
+      const processContainer = document.getElementById("processStepsContainer");
+      processSteps.forEach((step, idx) => {
+        const stepEl = document.createElement("div");
+        stepEl.className = "process-step";
+        stepEl.style.cssText = `
+          display:flex; flex-direction:column; align-items:center; gap:20px;
+          width:191px; flex-shrink:0;
+        `;
+        stepEl.innerHTML = `
+          <!-- Circle + Step badge -->
+          <div style="display:flex; flex-direction:column; align-items:center; width:191px; position:relative;">
+            <!-- Outer circle (node 1:4738) -->
+            <div style="position:relative; width:191px; height:191px; margin-bottom:-15px;">
+              <div style="position:absolute; inset:0; width:191px; height:191px;
+                          border-radius:9999px; border:1px solid #cdcfd4; box-sizing:border-box;
+                          background:#fff;"></div>
+              <!-- Setting icon (vuesax/linear/setting-4) -->
+              <div style="position:absolute; left:50%; top:50%; transform:translate(-50%, -50%);
+                          width:52px; height:52px;">
+                <img src="${processIconSrc}"
+                     onerror="this.onerror=null;this.src='${processIconFallback}';"
+                     alt="" aria-hidden="true"
+                     style="width:100%; height:100%; object-fit:contain; display:block;" />
+              </div>
+            </div>
+            <!-- Step N badge (node 1:4747) -->
+            <div style="position:relative; z-index:1;
+                        display:inline-flex; align-items:center; justify-content:center;
+                        padding:7.65px 9.563px; background:#da291c; border-radius:28.688px;">
+              <p style="font-family:Tahoma,Arial,sans-serif; font-size:11.475px; line-height:normal;
+                        color:#fff; margin:0; white-space:nowrap;">Step ${step.number}</p>
+            </div>
+          </div>
+          <!-- Title + Description (node 1:4750) -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:6px; width:100%; text-align:center;">
+            <p style="font-family:Tahoma,Arial,sans-serif; font-weight:700; font-size:13.387px;
+                      line-height:normal; color:#1f1f1f; margin:0; width:100%;">${step.title}</p>
+            <p style="font-family:Tahoma,Arial,sans-serif; font-weight:400; font-size:11.475px;
+                      line-height:normal; color:#a5a5a5; margin:0; width:100%;">${step.description}</p>
+          </div>
+        `;
+        processContainer.appendChild(stepEl);
+
+        if (idx < processSteps.length - 1) {
+          const arrow = document.createElement("div");
+          arrow.className = "process-arrow";
+          // Vertically center arrow on the 191px circle (≈95px), accounting for arrow height (8px)
+          arrow.style.cssText = `
+            flex-shrink:0; width:48px; height:8px; margin-top:91px;
+            display:flex; align-items:center; justify-content:center;
+          `;
+          arrow.innerHTML = arrowSvg;
+          processContainer.appendChild(arrow);
+        }
       });
     </script>
   </body>

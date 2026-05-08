@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alfa Mortgage - Details</title>
+    <title>Seller Contact - Alfa Mortgage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * { 
@@ -67,10 +67,10 @@
             margin-top: 12px;
         }
 
-        /* Right Form Section */
-        .form-section {
+        /* Success Content */
+        .success-content {
             flex: 1;
-            padding: 32px 36px 36px;
+            padding: 40px 36px 40px;
             background: #fff;
             position: relative;
         }
@@ -85,98 +85,9 @@
             margin-bottom: 6px;
             transition: color 0.2s;
         }
+        
         .back-link:hover { color: #e30613; }
         .back-link svg { width: 16px; height: 16px; }
-
-        .form-section h4 {
-            font-size: 1.55rem;
-            font-weight: 700;
-            color: #111;
-            margin-bottom: 22px;
-        }
-
-        .form-label {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #222;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .form-control,
-        .form-select {
-            border: 1.5px solid #dde0e6;
-            border-radius: 6px;
-            padding: 9px 13px;
-            font-size: 0.88rem;
-            color: #333;
-            background: #fafafa;
-            width: 100%;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .form-control::placeholder { color: #bbb; }
-
-        .form-control:focus,
-        .form-select:focus {
-            outline: none;
-            border-color: #e30613;
-            box-shadow: 0 0 0 3px rgba(227,6,19,0.1);
-            background: #fff;
-        }
-
-        .mb-field { margin-bottom: 14px; }
-
-        /* Consent Checkbox */
-        .consent-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 18px 0 24px;
-        }
-
-        .consent-row input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: #e30613;
-            flex-shrink: 0;
-            cursor: pointer;
-        }
-
-        .consent-row label {
-            font-size: 0.82rem;
-            color: #444;
-            cursor: pointer;
-            line-height: 1.4;
-        }
-
-        /* Submit Button */
-        .btn-submit {
-            display: block;
-            width: 65%;
-            margin: 0 auto;
-            background: #e30613;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 11px;
-            font-size: 0.98rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-        }
-
-        .btn-submit:hover { background: #c20511; }
-        .btn-submit:active { transform: scale(0.98); }
-
-        /* ==================== SUCCESS PAGE STYLES ==================== */
-        .success-content {
-            flex: 1;
-            padding: 40px 36px 40px;
-            background: #fff;
-            position: relative;
-        }
 
         .success-box {
             text-align: center;
@@ -223,7 +134,7 @@
             word-break: break-all;
         }
 
-        /* Close Button - Same style as Submit */
+        /* Close Button */
         .btn-close {
             display: block;
             width: 65%;
@@ -251,15 +162,14 @@
         /* Responsive */
         @media (max-width: 580px) {
             .sidebar { display: none; }
-            .form-section, .success-content { padding: 32px 20px; }
-            .btn-submit, .btn-close { width: 100%; }
+            .success-content { padding: 32px 20px; }
+            .btn-close { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-{% if show_modal %}
-<!-- SUCCESS PAGE (Seller Contact Screen) -->
+<!-- SELLER CONTACT PAGE (Always show this) -->
 <div class="mortgage-card">
     <!-- Left Red Sidebar -->
     <div class="sidebar">
@@ -279,11 +189,10 @@
         </a>
 
         <div class="success-box">
-            <h1>Congratulations</h1>
+            <h1>Seller Contact</h1>
             <p>
-                Your request has been received.<br>
-                For further assistance, please contact<br>
-                the seller at:
+                For inquiries about this property,<br>
+                please contact the seller directly at:
             </p>
 
             <div class="contact-box">
@@ -292,70 +201,11 @@
             </div>
 
             <button onclick="window.location.href='{% url 'browse_properties' %}'" class="btn-close">
-                Close
+                Back to Properties
             </button>
         </div>
     </div>
 </div>
-
-{% else %}
-<!-- FORM PAGE -->
-<div class="mortgage-card">
-
-    <!-- Left Red Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-logo">
-            <img src="{% static 'images/logo.png' %}" alt="Bank Alfalah Logo">
-        </div>
-        <div class="sidebar-title">Alfa<br>Mortgage</div>
-    </div>
-
-    <!-- Right Form -->
-    <div class="form-section">
-        <a href="{% url 'browse_properties' %}" class="back-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M19 12H5M12 5l-7 7 7 7"/>
-            </svg>
-        </a>
-        <h4>Details</h4>
-
-        <form method="POST">
-            {% csrf_token %}
-
-            <div class="mb-field">
-                <label class="form-label">Name</label>
-                <input type="text" name="name" class="form-control" placeholder="xxx" required>
-            </div>
-
-            <div class="mb-field">
-                <label class="form-label">City</label>
-                <select name="city" class="form-select form-control" required>
-                    <option value="Karachi">Karachi</option>
-                    <option value="Lahore">Lahore</option>
-                    <option value="Islamabad">Islamabad</option>
-                </select>
-            </div>
-
-            <div class="mb-field">
-                <label class="form-label">Contact No</label>
-                <input type="text" name="contact" class="form-control" placeholder="0000 0000000" required>
-            </div>
-
-            <div class="mb-field">
-                <label class="form-label">CNIC</label>
-                <input type="text" name="cnic" class="form-control" placeholder="00000 0000000 0" required>
-            </div>
-
-            <div class="consent-row">
-                <input type="checkbox" id="consent" required>
-                <label for="consent">I consent to share my information with the seller</label>
-            </div>
-
-            <button type="submit" class="btn-submit">Submit</button>
-        </form>
-    </div>
-</div>
-{% endif %}
 
 </body>
 </html>

@@ -1,0 +1,489 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication - Alfa Mortgage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            background-image: url("{% static 'images/baf.jfif' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 0;
+        }
+
+        .auth-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(20, 20, 20, 0.82);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 420px;
+            backdrop-filter: blur(6px);
+        }
+
+        .auth-card h2 {
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .auth-card .subtitle {
+            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .form-label {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin-bottom: 0.35rem;
+            display: block;
+        }
+
+        .form-control {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            color: #fff;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.9rem;
+            width: 100%;
+            margin-bottom: 1.1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-control::placeholder { color: rgba(255,255,255,0.3); }
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(227, 6, 19, 0.7);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .forgot-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: -0.6rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .forgot-row a {
+            color: #e30613;
+            font-size: 0.8rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .forgot-row a:hover { text-decoration: underline; }
+
+        .btn-auth {
+            background: #e30613;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.65rem;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 0.3rem;
+            transition: background 0.2s;
+        }
+
+        .btn-auth:hover { background: #c0040f; }
+        .btn-auth:disabled { 
+            background: #888;
+            cursor: not-allowed;
+        }
+
+        .bottom-text {
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.82rem;
+            margin-top: 1.5rem;
+        }
+
+        .bottom-text a {
+            color: #e30613;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .bottom-text a:hover { text-decoration: underline; }
+
+        .error-msg, .success-msg {
+            font-size: 0.82rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            padding: 0.5rem 0.8rem;
+        }
+
+        .error-msg {
+            color: #ff6b6b;
+            background: rgba(227, 6, 19, 0.1);
+            border: 1px solid rgba(227, 6, 19, 0.25);
+            display: none;
+        }
+
+        .success-msg {
+            color: #51cf66;
+            background: rgba(81, 207, 102, 0.1);
+            border: 1px solid rgba(81, 207, 102, 0.25);
+            display: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-card">
+        <img src="{% static 'images/logo.png' %}" alt="BAF Logo" style="height: 48px; width: auto; margin-bottom: 1.5rem; display: block;">
+        
+        <div id="errorMsg" class="error-msg"></div>
+        <div id="successMsg" class="success-msg"></div>
+
+        <!-- LOGIN FORM -->
+        <div id="loginForm" class="form-container active fade-in">
+            <h2>Welcome back</h2>
+            <p class="subtitle">Login to your Alfa Mortgage account</p>
+
+            <form id="loginFormElement">
+                <label class="form-label">Email</label>
+                <input type="email" id="loginEmail" name="email" class="form-control" placeholder="Enter Email" required>
+
+                <label class="form-label">Password</label>
+                <input type="password" id="loginPassword" name="password" class="form-control" placeholder="Enter Password" required>
+
+                <div class="forgot-row">
+                    <a href="{% url 'forgot_password' %}">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-auth">
+                    <span id="loginBtnText">Login</span>
+                    <span class="loading-spinner" id="loginSpinner"></span>
+                </button>
+            </form>
+
+            <p class="bottom-text">
+                Don't have an account? <a id="showSignup">Sign up</a>
+            </p>
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <div id="signupForm" class="form-container">
+            <h2>Create your account</h2>
+            <p class="subtitle">Sign up for your Alfa Mortgage account</p>
+
+            <form id="signupFormElement">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="signupName" name="name" class="form-control" placeholder="Enter Full Name" required>
+
+                <label class="form-label">Email</label>
+                <input type="email" id="signupEmail" name="email" class="form-control" placeholder="Enter Email" required>
+
+                <label class="form-label">Password</label>
+                <input type="password" id="signupPassword" name="password" class="form-control" placeholder="Enter Password" minlength="6" required>
+
+                <label class="form-label">Confirm Password</label>
+                <input type="password" id="signupConfirmPassword" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+
+                <button type="submit" class="btn-auth">
+                    <span id="signupBtnText">Sign up</span>
+                    <span class="loading-spinner" id="signupSpinner"></span>
+                </button>
+            </form>
+
+            <p class="bottom-text">
+                Already have an account? <a id="showLogin">Log in</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Firebase configuration
+        {% comment %} const firebaseConfig = {
+            apiKey: "AIzaSyBHyR1aY4exeVV8eb3tXxbOJBkzAc5lqyg",
+            authDomain: "alfamortgage-e0375.firebaseapp.com",
+            projectId: "alfamortgage-e0375",
+            storageBucket: "alfamortgage-e0375.firebasestorage.app",
+            messagingSenderId: "343934904869",
+            appId: "1:343934904869:web:da36cc8fceb292f59bedcc",
+            measurementId: "G-E4ZXM52SWB"
+        }; {% endcomment %}
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBbUovNi69LVu9IkmS1X8mfJQpAKXukIUE",
+            authDomain: "alfa-mortgage.firebaseapp.com",
+            projectId: "alfa-mortgage",
+            storageBucket: "alfa-mortgage.firebasestorage.app",
+            messagingSenderId: "529818641633",
+            appId: "1:529818641633:web:fda65ff39acf954fe843a0",
+            measurementId: "G-HS510VBJV7"
+            };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Get DOM elements
+        const loginFormContainer = document.getElementById('loginForm');
+        const signupFormContainer = document.getElementById('signupForm');
+        const showSignupLink = document.getElementById('showSignup');
+        const showLoginLink = document.getElementById('showLogin');
+        const errorMsg = document.getElementById('errorMsg');
+        const successMsg = document.getElementById('successMsg');
+
+        // Toggle between login and signup
+        showSignupLink.addEventListener('click', () => {
+            loginFormContainer.classList.remove('active');
+            signupFormContainer.classList.add('active', 'fade-in');
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+        });
+
+        showLoginLink.addEventListener('click', () => {
+            signupFormContainer.classList.remove('active');
+            loginFormContainer.classList.add('active', 'fade-in');
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+        });
+
+        // LOGIN FORM HANDLER
+        const loginFormElement = document.getElementById('loginFormElement');
+        const loginBtn = loginFormElement.querySelector('.btn-auth');
+        const loginBtnText = document.getElementById('loginBtnText');
+        const loginSpinner = document.getElementById('loginSpinner');
+
+        loginFormElement.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Show loading state
+            loginBtn.disabled = true;
+            loginBtnText.textContent = 'Logging in...';
+            loginSpinner.style.display = 'inline-block';
+            errorMsg.style.display = 'none';
+
+            try {
+                // Sign in with Firebase
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Get Firebase ID token
+                const idToken = await user.getIdToken();
+
+                // Send token to Django backend
+                const response = await fetch('{% url "firebase_login" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        idToken: idToken,
+                        email: email
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Redirect to appropriate page
+                    window.location.href = data.redirect_url;
+                } else {
+                    throw new Error(data.error || 'Login failed');
+                }
+
+            } catch (error) {
+                console.error('Login error:', error);
+                
+                // Show user-friendly error messages
+                let errorMessage = 'Login failed. Please try again.';
+                
+                if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+                    errorMessage = 'Invalid email or password.';
+                } else if (error.code === 'auth/user-not-found') {
+                    errorMessage = 'No account found with this email.';
+                } else if (error.code === 'auth/too-many-requests') {
+                    errorMessage = 'Too many failed attempts. Please try again later.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = 'Network error. Please check your connection.';
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+
+                errorMsg.textContent = errorMessage;
+                errorMsg.style.display = 'block';
+
+                // Reset button state
+                loginBtn.disabled = false;
+                loginBtnText.textContent = 'Login';
+                loginSpinner.style.display = 'none';
+            }
+        });
+
+        // SIGNUP FORM HANDLER
+        const signupFormElement = document.getElementById('signupFormElement');
+        const signupBtn = signupFormElement.querySelector('.btn-auth');
+        const signupBtnText = document.getElementById('signupBtnText');
+        const signupSpinner = document.getElementById('signupSpinner');
+
+        signupFormElement.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+            // Hide previous messages
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                errorMsg.textContent = 'Passwords do not match';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // Validate password length
+            if (password.length < 6) {
+                errorMsg.textContent = 'Password must be at least 6 characters';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // Show loading state
+            signupBtn.disabled = true;
+            signupBtnText.textContent = 'Creating account...';
+            signupSpinner.style.display = 'inline-block';
+
+            try {
+                // Create user with Firebase
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Update user profile with name
+                await updateProfile(user, {
+                    displayName: name
+                });
+
+                // Get Firebase ID token
+                const idToken = await user.getIdToken();
+
+                // Send token to Django backend
+                const response = await fetch('{% url "firebase_signup" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        idToken: idToken,
+                        email: email,
+                        name: name
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    successMsg.textContent = 'Account created successfully! Redirecting...';
+                    successMsg.style.display = 'block';
+
+                    // Redirect after a short delay
+                    setTimeout(() => {
+                        window.location.href = data.redirect_url;
+                    }, 1000);
+                } else {
+                    throw new Error(data.error || 'Signup failed');
+                }
+
+            } catch (error) {
+                console.error('Signup error:', error);
+                
+                // Show user-friendly error messages
+                let errorMessage = 'Signup failed. Please try again.';
+                
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = 'An account with this email already exists.';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Invalid email address.';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = 'Password is too weak. Please use a stronger password.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = 'Network error. Please check your connection.';
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+
+                errorMsg.textContent = errorMessage;
+                errorMsg.style.display = 'block';
+
+                // Reset button state
+                signupBtn.disabled = false;
+                signupBtnText.textContent = 'Sign up';
+                signupSpinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

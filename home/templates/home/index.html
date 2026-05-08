@@ -2,77 +2,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DreamHome - Find Your Dream House</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alfa Mortgage</title>
+<style>
+/* ===== Global Styles ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; line-height: 1.5; background: #f5f5f5; color: #333; }
+
+/* ===== Header / Navbar ===== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* ===== Logo Flex Layout (Horizontal) ===== */
+.logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 56px;
+    padding: 0 16px;
+    gap: 8px;
+}
+.logo-alfa { height: 24px; width: auto; }
+.logo-mortgage {
+    font-family: "Cabinet Grotesk Variable", sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%;
+    font-variant: small-caps;
+    background: radial-gradient(100% 100% at 0% 50%, #000 0%, #D30248 40%, #D30202 80%, #D34802 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ===== Navbar Links with Icons ===== */
+.nav-links { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+.nav-links li { position: relative; }
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--Interface-Text-text-dark, #000);
+    font-family: Tahoma, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.486px;
+}
+.nav-links a:hover { color: #d4145a; }
+.nav-icon { width: 16px; height: 16px; }
+.nav-links li ul {
+    display: none;
+    position: absolute;
+    top: 120%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 0.5rem 0;
+    border-radius: 0.5rem;
+    min-width: 180px;
+    z-index: 50;
+}
+.nav-links li:hover ul { display: block; }
+.nav-links li ul li { padding: 0.5rem 1rem; }
+.nav-links li ul li a { color: #333; }
+.nav-links li ul li a:hover { color: #d4145a; }
+
+/* ===== Apply for Mortgage Button ===== */
+.btn-apply {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--Grad-2, linear-gradient(65deg, #000 0%, #D30248 27.15%, #D30202 54.3%, #D34802 67.88%));
+    font-family: Tahoma, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.486px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.btn-apply:hover { transform: scale(1.05); }
+
+/* ===== Login / Signup Button ===== */
+.btn-login {
+    font-family: Tahoma, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.486px;
+    color: var(--Interface-Text-text-dark, #000);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* ===== User Icon ===== */
+.user-icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+/* ===== Hero Section ===== */
+.hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 2rem 1rem; background: #fff; border-radius: 1rem; margin: 1rem; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+.hero h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+.hero p { font-size: 1rem; margin-bottom: 1rem; color: #666; }
+.hero .search-bar { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; max-width: 600px; }
+.search-bar input, .search-bar select { padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #ccc; width: 100%; }
+.search-bar button { padding: 0.6rem; border-radius: 0.5rem; border: none; background-color: #d4145a; color: #fff; font-weight: bold; cursor: pointer; }
+.search-bar button:hover { background-color: #b21247; }
+
+/* ===== Feature Cards ===== */
+.features { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem; justify-content: center; }
+.feature-card { flex: 1 1 140px; background: #fff; padding: 1rem; border-radius: 1rem; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); cursor: pointer; }
+.feature-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+/* ===== Property Listings ===== */
+.properties { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem; justify-content: center; }
+.property-card { flex: 1 1 250px; background: #fff; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05); transition: transform 0.3s; }
+.property-card:hover { transform: translateY(-5px); }
+.property-card img { width: 100%; height: auto; }
+.property-card .details { padding: 0.8rem; }
+.property-card .details h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+.property-card .details p { font-size: 0.85rem; color: #666; }
+
+/* ===== CTA Section ===== */
+.cta-agent { display: flex; flex-direction: column; align-items: center; background: #fff; margin: 1rem; border-radius: 1rem; padding: 1.5rem; text-align: center; }
+.cta-agent h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.cta-agent p { margin-bottom: 1rem; color: #666; }
+.cta-agent button { background: linear-gradient(90deg,#d4145a,#ff5a00); color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; border: none; cursor: pointer; }
+
+/* ===== Footer ===== */
+footer { background: #fff; margin-top: 1rem; padding: 1rem; text-align: center; font-size: 0.85rem; color: #666; }
+
+/* ===== Responsive ===== */
+@media(min-width: 768px) {
+    .hero { flex-direction: row; justify-content: space-between; text-align: left; padding: 3rem; }
+    .hero .search-bar { flex-direction: row; gap: 0.5rem; }
+    .features { justify-content: flex-start; }
+    .cta-agent { flex-direction: row; justify-content: space-between; text-align: left; }
+}
+</style>
 </head>
 <body>
 
-<!-- Navbar with Real Logo Image -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
-  <div class="container">
-    <!-- Company Logo as Image -->
-    <a class="navbar-brand" href="#">
-      <img src="{% static 'images/logo.png' %}" alt="DreamHome Logo" height="55" class="d-inline-block align-top">
-    </a>
-    
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto align-items-center">
-        <li class="nav-item"><a class="nav-link mx-3" href="#">Buy</a></li>
-        <li class="nav-item"><a class="nav-link mx-3" href="#">Sell</a></li>
-        <li class="nav-item"><a class="nav-link mx-3" href="#">New Projects</a></li>
-        <li class="nav-item"><a class="nav-link mx-3" href="#">My Activity</a></li>
-        <li class="nav-item ms-3">
-          <a href="#" class="btn red-btn">+ Add Property</a>
-        </li>
-      </ul>
+<!-- Header -->
+<header>
+    <div class="logo">
+        <img src="{% static 'images/Vector.svg' %}" alt="Alfa Logo" class="logo-alfa">
+        <span class="logo-mortgage">Mortgage</span>
     </div>
-  </div>
-</nav>
+    <nav>
+        <ul class="nav-links">
+            <li>
+                <a href="#">
+                    Buy Property
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Sell Property
+                </a>
+            </li>
+            <li>
+                <a href="#">Services &#9662;</a>
+                <ul>
+                    <li><a href="#">Legal Opinion</a></li>
+                    <li><a href="#">Property Valuation Report</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Mortgage Calculator</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+    <!-- Right side buttons -->
+    <div style="display:flex;align-items:center;gap:12px;">
+        <button class="btn-apply">Apply for Mortgage</button>
+        <button class="btn-login">Login / Signup</button>
+        <img src="{% static 'images/user.svg' %}" alt="User Icon" class="user-icon">
+    </div>
+</header>
 
 <!-- Hero Section -->
-<section class="hero d-flex align-items-center">
-  <div class="container position-relative">
-    <div class="row">
-      
-      <!-- Left Side -->
-      <div class="col-lg-7">
-        <h1 class="display-3 fw-bold mb-4 text-white">
-          Find Your Dream House
-        </h1>
-        <p class="lead mb-5 text-white" style="max-width: 580px; font-size: 1.25rem;">
-          Discover premium homes, apartments and plots across Karachi and Pakistan with easy financing solutions
-        </p>
-
-        <!-- Three Buttons Side by Side - All Red like your reference -->
-        <div class="d-flex flex-wrap gap-3">
-          {% comment %} <a href="#" class="btn red-btn btn-lg px-5 py-3">Buy Property</a> {% endcomment %}
-          <a href="{% url 'browse_properties' %}" class="btn red-btn btn-lg px-5 py-3">Buy Property</a>
-          <a href="#" class="btn red-btn btn-lg px-5 py-3">Sell Property</a>
-          <a href="#" class="btn red-btn btn-lg px-5 py-3">Avail Financing</a>
+<section class="hero">
+    <div class="hero-text">
+        <h1>Buy, Sell & Finance Property – 100% Digitally</h1>
+        <p>Search verified properties, get valuation & legal services, and secure mortgage financing without visiting a branch.</p>
+        <div class="search-bar">
+            <input type="text" placeholder="Enter location">
+            <select><option>Select size</option></select>
+            <input type="number" placeholder="Set budget">
+            <button>Find Property</button>
         </div>
-      </div>
-
-      <!-- Right Side Action Boxes -->
-      <div class="col-lg-5">
-        <div class="action-box p-4 mb-3">
-          Check your financing availability
-        </div>
-        <div class="action-box p-4 mb-3">
-          Request Legal Opinion
-        </div>
-        <div class="action-box p-4">
-          Request Property Evaluation
-        </div>
-      </div>
-
     </div>
-  </div>
+    <div class="hero-image">
+        <img src="{% static 'images/Desktop-1.jpg' %}" alt="Property Image">
+    </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Feature Cards -->
+<section class="features">
+    <div class="feature-card">Buy Property</div>
+    <div class="feature-card">Sell Property</div>
+    <div class="feature-card">Apply for Mortgage</div>
+    <div class="feature-card">Mortgage Calculator</div>
+</section>
+
+<!-- Property Listings -->
+<section class="properties">
+    <div class="property-card">
+        <img src="{% static 'images/Screens.jpg' %}" alt="Property 1">
+        <div class="details">
+            <h3>Halar Mansion Society</h3>
+            <p>PKR 12,000,000</p>
+        </div>
+    </div>
+    <div class="property-card">
+        <img src="{% static 'images/Screens (1).jpg' %}" alt="Property 2">
+        <div class="details">
+            <h3>Karachi Bar Society</h3>
+            <p>PKR 12,000,000</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-agent">
+    <div>
+        <h2>Are you a real estate agent?</h2>
+        <p>Partner with Alfa Mortgage</p>
+        <button>Partner Now</button>
+    </div>
+    <div>
+        <img src="{% static 'images/Desktop-1.jpg' %}" alt="Agent" style="max-width:200px;border-radius:50%;">
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    &copy; 2026 Alfa Mortgage. All rights reserved.
+</footer>
+
 </body>
 </html>

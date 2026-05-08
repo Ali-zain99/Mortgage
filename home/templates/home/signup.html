@@ -1,4 +1,4 @@
-{% load static %}
+{% comment %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,5 +178,356 @@
         <a href="{% url 'login' %}">Log in</a>
     </div>
     </div>
+</body>
+</html> {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Alfa Mortgage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            background-image: url("{% static 'images/baf.jfif' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 0;
+        }
+
+        .auth-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(20, 20, 20, 0.82);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(6px);
+        }
+
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            background: #e30613;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-card h2 {
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .auth-card .subtitle {
+            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .form-label {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin-bottom: 0.35rem;
+            display: block;
+        }
+
+        .form-control {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            color: #fff;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.9rem;
+            width: 100%;
+            margin-bottom: 1.1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-control::placeholder { color: rgba(255,255,255,0.3); }
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(227, 6, 19, 0.7);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .btn-signup {
+            background: #e30613;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.65rem;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .btn-signup:hover { background: #c0040f; }
+        .btn-signup:disabled { 
+            background: #888;
+            cursor: not-allowed;
+        }
+
+        .footer-link {
+            text-align: right;
+            margin-top: 0.4rem;
+        }
+
+        .footer-link a {
+            color: #e30613;
+            font-size: 0.82rem;
+            text-decoration: none;
+        }
+
+        .footer-link a:hover { text-decoration: underline; }
+
+        .bottom-text {
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.82rem;
+            margin-top: 1.5rem;
+        }
+
+        .bottom-text a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .bottom-text a:hover { color: #fff; }
+
+        .error-msg, .success-msg {
+            font-size: 0.82rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            padding: 0.5rem 0.8rem;
+        }
+
+        .error-msg {
+            color: #ff6b6b;
+            background: rgba(227, 6, 19, 0.1);
+            border: 1px solid rgba(227, 6, 19, 0.25);
+            display: none;
+        }
+
+        .success-msg {
+            color: #51cf66;
+            background: rgba(81, 207, 102, 0.1);
+            border: 1px solid rgba(81, 207, 102, 0.25);
+            display: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-card">
+        <img src="{% static 'images/logo.png' %}" alt="BAF Logo" style="height: 48px; width: auto; margin-bottom: 1.5rem; display: block;">
+        <h2>Set up your credentials</h2>
+        <p class="subtitle">Please choose a username and a password for your Alfa account</p>
+
+        <div id="errorMsg" class="error-msg"></div>
+        <div id="successMsg" class="success-msg"></div>
+
+        <form id="signupForm">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Enter Full Name" required>
+
+            <label class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required>
+
+            <label class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" minlength="6" required>
+
+            <label class="form-label">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+
+            <button type="submit" id="signupBtn" class="btn-signup">
+                <span id="signupBtnText">Sign up</span>
+                <span class="loading-spinner" id="loadingSpinner"></span>
+            </button>
+        </form>
+        
+        <div class="bottom-text">
+            Already have an account?
+            <a href="{% url 'login' %}">Log in</a>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Firebase configuration
+        {% comment %} const firebaseConfig = {
+            apiKey: "AIzaSyBHyR1aY4exeVV8eb3tXxbOJBkzAc5lqyg",
+            authDomain: "alfamortgage-e0375.firebaseapp.com",
+            projectId: "alfamortgage-e0375",
+            storageBucket: "alfamortgage-e0375.firebasestorage.app",
+            messagingSenderId: "343934904869",
+            appId: "1:343934904869:web:da36cc8fceb292f59bedcc",
+            measurementId: "G-E4ZXM52SWB"
+        }; {% endcomment %}
+        const firebaseConfig = {
+            apiKey: "AIzaSyBbUovNi69LVu9IkmS1X8mfJQpAKXukIUE",
+            authDomain: "alfa-mortgage.firebaseapp.com",
+            projectId: "alfa-mortgage",
+            storageBucket: "alfa-mortgage.firebasestorage.app",
+            messagingSenderId: "529818641633",
+            appId: "1:529818641633:web:fda65ff39acf954fe843a0",
+            measurementId: "G-HS510VBJV7"
+            };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Get form elements
+        const signupForm = document.getElementById('signupForm');
+        const errorMsg = document.getElementById('errorMsg');
+        const successMsg = document.getElementById('successMsg');
+        const signupBtn = document.getElementById('signupBtn');
+        const signupBtnText = document.getElementById('signupBtnText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Handle form submission
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Hide previous messages
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                errorMsg.textContent = 'Passwords do not match';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // Validate password length
+            if (password.length < 6) {
+                errorMsg.textContent = 'Password must be at least 6 characters';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // Show loading state
+            signupBtn.disabled = true;
+            signupBtnText.textContent = 'Creating account...';
+            loadingSpinner.style.display = 'inline-block';
+
+            try {
+                // Create user with Firebase
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Update user profile with name
+                await updateProfile(user, {
+                    displayName: name
+                });
+
+                // Get Firebase ID token
+                const idToken = await user.getIdToken();
+
+                // Send token to Django backend
+                const response = await fetch('{% url "firebase_signup" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        idToken: idToken,
+                        email: email,
+                        name: name
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    successMsg.textContent = 'Account created successfully! Redirecting...';
+                    successMsg.style.display = 'block';
+
+                    // Redirect after a short delay
+                    setTimeout(() => {
+                        window.location.href = data.redirect_url;
+                    }, 1000);
+                } else {
+                    throw new Error(data.error || 'Signup failed');
+                }
+
+            } catch (error) {
+                console.error('Signup error:', error);
+                
+                // Show user-friendly error messages
+                let errorMessage = 'Signup failed. Please try again.';
+                
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = 'An account with this email already exists.';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Invalid email address.';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = 'Password is too weak. Please use a stronger password.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = 'Network error. Please check your connection.';
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+
+                errorMsg.textContent = errorMessage;
+                errorMsg.style.display = 'block';
+
+                // Reset button state
+                signupBtn.disabled = false;
+                signupBtnText.textContent = 'Sign up';
+                loadingSpinner.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

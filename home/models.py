@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from datetime import timedelta
 from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
@@ -13,17 +15,58 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.full_name
     
-# class Property(models.Model):
-#     title = models.CharField(max_length=255)
-#     location = models.CharField(max_length=255)
-#     price = models.DecimalField(max_digits=12, decimal_places=2)   # or however you store price
-#     bedrooms = models.IntegerField(default=0)
-#     type = models.CharField(max_length=100, blank=True)
-#     image = models.ImageField(upload_to='properties/', blank=True, null=True)
-#     status = models.CharField(max_length=50, default='Pending')
-#     description = models.TextField(blank=True)
-    # add any other fields you need
     
+class PasswordResetOTP(models.Model):
+    """
+    Model to store OTP for password reset
+    OTPs automatically expire after 60 seconds
+    """
+    email = models.EmailField()
+    otp = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_verified = models.BooleanField(default=False)
+    expires_at = models.DateTimeField()
+    
+    def save(self, *args, **kwargs):
+        # Set expiration time to 60 seconds from creation
+        if not self.expires_at:
+            self.expires_at = timezone.now() + timedelta(seconds=60)
+        super().save(*args, **kwargs)
+    
+    def is_expired(self):
+        """Check if OTP has expired"""
+        return timezone.now() > self.expires_at
+    
+    def __str__(self):
+        return f"OTP for {self.email} - Expires at {self.expires_at}"
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Password Reset OTP"
+        verbose_name_plural = "Password Reset OTPs"
+ 
+# class PasswordResetTemp(models.Model):
+#     email = models.EmailField(unique=True)
+#     temp_password = models.CharField(max_length=255)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     expires_at = models.DateTimeField()
+    
+#     def save(self, *args, **kwargs):
+#         if not self.expires_at:
+#             self.expires_at = timezone.now() + timedelta(seconds=30)
+#         super().save(*args, **kwargs)
+    
+#     def is_expired(self):
+#         return timezone.now() > self.expires_at
+    
+#     def __str__(self):
+#         return f"Temp password for {self.email} - Expires at {self.expires_at}"
+    
+#     class Meta:
+#         ordering = ['-created_at']
+#         verbose_name = "Temporary Password"
+#         verbose_name_plural = "Temporary Passwords"
+        
 class Property(models.Model):
     STATUS_CHOICES = (
         ('Verified', 'Verified'),
