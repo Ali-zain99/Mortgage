@@ -649,7 +649,7 @@
           border-top-right-radius: 32px;
           overflow: hidden;
         }
-        .site-footer .max-w-\[1280px\] {
+        .site-footer > div {
           padding-top: 20px !important;
           padding-bottom: 20px !important;
         }
@@ -1046,9 +1046,9 @@
     </style>
   </head>
   <body class="font-tahoma text-primaryText bg-white">
-    <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+    <div class="w-full px-4 md:px-8">
       <!-- Navbar (Desktop, ≥ 1024px) -->
-      <header class="header-desktop mt-3 mx-auto flex w-full max-w-[1280px] items-center justify-between">
+      <header class="header-desktop mt-3 flex w-full items-center justify-between">
         <div class="brand-logo">
           <div class="brand-logo-row">
             <img src="/static/images/Vector.svg" onerror="this.onerror=null;this.src='../../static/images/Vector.svg';" alt="Alfa" class="brand-alfa-img" />
@@ -1057,7 +1057,7 @@
         </div>
 
         <nav class="hidden lg:flex items-center">
-          <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Buy Property</a>
+          <a href="buy-property/" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Buy Property</a>
           <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Sell Property</a>
           <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center gap-1">
             Services
@@ -1066,7 +1066,7 @@
                  alt="" aria-hidden="true"
                  class="w-[18px] h-[18px] opacity-70" />
           </a>
-          <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Mortgage Calculator</a>
+          <a href="mortgage-calculator/" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">Mortgage Calculator</a>
           <a href="#" class="nav-middle-link inline-flex px-4 py-3 items-center justify-center">About</a>
         </nav>
 
@@ -1135,7 +1135,7 @@
 
         <!-- Nav links (Figma node 35:5408) -->
         <nav class="mobile-menu-nav" aria-label="Mobile menu">
-          <a href="#" class="mobile-menu-link">Buy Property</a>
+          <a href="buy-property/" class="mobile-menu-link">Buy Property</a>
           <a href="#" class="mobile-menu-link">Sell Property</a>
 
           <!-- Services with submenu (node 35:5642) — collapsed by default -->
@@ -1461,7 +1461,7 @@
 
     <!-- Footer — Figma node 1:6199 -->
     <footer class="site-footer mt-20">
-      <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-12">
+      <div class="w-full px-4 md:px-8 py-12">
         <div class="footer-content">
           <!-- Logo column (node 1:6200) -->
           <div class="footer-logo-col">

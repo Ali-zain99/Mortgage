@@ -1,185 +1,3 @@
-{% comment %} {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Alfa Mortgage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            min-height: 100vh;
-            background-image: url("{% static 'images/baf.jfif' %}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
-            z-index: 0;
-        }
-
-        .auth-card {
-            position: relative;
-            z-index: 1;
-            background: rgba(20, 20, 20, 0.82);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            width: 100%;
-            max-width: 400px;
-            backdrop-filter: blur(6px);
-        }
-
-        .brand-logo {
-            width: 36px;
-            height: 36px;
-            background: #e30613;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            margin-bottom: 1.5rem;
-        }
-
-        .auth-card h2 {
-            color: #ffffff;
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-
-        .auth-card .subtitle {
-            color: rgba(255,255,255,0.45);
-            font-size: 0.85rem;
-            margin-bottom: 1.8rem;
-        }
-
-        .form-label {
-            color: rgba(255,255,255,0.75);
-            font-size: 0.82rem;
-            font-weight: 500;
-            margin-bottom: 0.35rem;
-            display: block;
-        }
-
-        .form-control {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 8px;
-            color: #fff;
-            padding: 0.6rem 0.9rem;
-            font-size: 0.9rem;
-            width: 100%;
-            margin-bottom: 1.1rem;
-            transition: border-color 0.2s;
-        }
-
-        .form-control::placeholder { color: rgba(255,255,255,0.3); }
-        .form-control:focus {
-            outline: none;
-            border-color: rgba(227, 6, 19, 0.7);
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            box-shadow: none;
-        }
-
-        .btn-signup {
-            background: #e30613;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 0.65rem;
-            font-size: 1rem;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            margin-top: 0.5rem;
-            transition: background 0.2s;
-        }
-
-        .btn-signup:hover { background: #c0040f; }
-
-        .footer-link {
-            text-align: right;
-            margin-top: 0.4rem;
-        }
-
-        .footer-link a {
-            color: #e30613;
-            font-size: 0.82rem;
-            text-decoration: none;
-        }
-
-        .footer-link a:hover { text-decoration: underline; }
-
-        .bottom-text {
-            text-align: center;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.82rem;
-            margin-top: 1.5rem;
-        }
-
-        .bottom-text a {
-            color: rgba(255,255,255,0.75);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .bottom-text a:hover { color: #fff; }
-
-        .error-msg {
-            color: #ff6b6b;
-            font-size: 0.82rem;
-            margin-bottom: 1rem;
-            background: rgba(227, 6, 19, 0.1);
-            border-radius: 6px;
-            padding: 0.5rem 0.8rem;
-            border: 1px solid rgba(227, 6, 19, 0.25);
-        }
-    </style>
-</head>
-<body>
-    <div class="auth-card">
-        <img src="{% static 'images/logo.png' %}" alt="BAF Logo" style="height: 48px; width: auto; margin-bottom: 1.5rem; display: block;">
-        <h2>Set up your credentials</h2>
-        <p class="subtitle">Please choose a username and a password for your Alfa account</p>
-
-        {% if error %}
-        <div class="error-msg">{{ error }}</div>
-        {% endif %}
-
-        <form method="POST" action="{% url 'signup_action' %}">
-    {% csrf_token %}
-
-    <label class="form-label">Full Name</label>
-    <input type="text" name="name" class="form-control" placeholder="Enter Full Name" required>
-
-    <label class="form-label">Email</label>
-    <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
-
-    <label class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
-
-    <label class="form-label">Confirm Password</label>
-    <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
-
-    <button type="submit" class="btn-signup">Sign up</button>
-</form>
-    <div class="bottom-text">
-        Already have an account?
-        <a href="{% url 'login' %}">Log in</a>
-    </div>
-    </div>
-</body>
-</html> {% endcomment %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -187,226 +5,740 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Alfa Mortgage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --text-primary: #141519;
+            --text-secondary: #6b6f80;
+            --surface: #f2f2f4;
+            --gradient: linear-gradient(86.29deg, #000000 1.21%, #D30248 42.84%, #D30202 84.46%, #D34802 105.28%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
 
         body {
             min-height: 100vh;
-            background-image: url("{% static 'images/baf.jfif' %}");
+            font-family: Tahoma, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--text-primary);
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+        .signup-layout {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        .left-visual {
+            width: 58.33%;
+            height: 100vh;
+            position: relative;
+            background-color: #0b1220;
+            background-image:
+                linear-gradient(
+                    105deg,
+                    rgba(0, 18, 40, 0.35) 0%,
+                    rgba(0, 0, 0, 0.08) 38%,
+                    rgba(0, 0, 0, 0.42) 100%
+                ),
+                url("{% static 'images/signup-hero-desktop.png' %}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+        }
+
+        .right-panel {
+            width: 41.67%;
+            height: 100vh;
+            background-color: #ffffff;
+            background-image:
+                radial-gradient(
+                    95% 72% at 106% -6%,
+                    rgba(211, 2, 2, 0.07) 0%,
+                    transparent 52%
+                ),
+                radial-gradient(
+                    125% 92% at 100% 0%,
+                    rgba(211, 2, 72, 0.12) 0%,
+                    rgba(255, 242, 246, 0.38) 32%,
+                    rgba(255, 255, 255, 0) 64%
+                );
             display: flex;
+            justify-content: center;
+            padding: clamp(14px, 4vh, 56px) clamp(16px, 2.8vw, 58px);
+        }
+
+        .signup-content {
+            width: 100%;
+            max-width: 522px;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(12px, 2vh, 24px);
+            overflow: hidden;
+        }
+
+        .top-area {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .back-button {
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', sans-serif;
+            text-decoration: none;
+            color: inherit;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
-            z-index: 0;
-        }
-
-        .auth-card {
-            position: relative;
-            z-index: 1;
-            background: rgba(20, 20, 20, 0.82);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 2.5rem 2rem;
-            width: 100%;
-            max-width: 400px;
-            backdrop-filter: blur(6px);
-        }
-
-        .brand-logo {
-            width: 36px;
-            height: 36px;
-            background: #e30613;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            margin-bottom: 1.5rem;
-        }
-
-        .auth-card h2 {
-            color: #ffffff;
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-
-        .auth-card .subtitle {
-            color: rgba(255,255,255,0.45);
-            font-size: 0.85rem;
-            margin-bottom: 1.8rem;
-        }
-
-        .form-label {
-            color: rgba(255,255,255,0.75);
-            font-size: 0.82rem;
-            font-weight: 500;
-            margin-bottom: 0.35rem;
+        .back-button svg {
+            width: 32px;
+            height: 32px;
             display: block;
         }
 
-        .form-control {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 40px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo {
+            width: 159px;
+            height: 31px;
+            object-fit: contain;
+            margin-top: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .messages {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .error-msg,
+        .success-msg {
+            display: none;
             border-radius: 8px;
-            color: #fff;
-            padding: 0.6rem 0.9rem;
-            font-size: 0.9rem;
-            width: 100%;
-            margin-bottom: 1.1rem;
-            transition: border-color 0.2s;
-        }
-
-        .form-control::placeholder { color: rgba(255,255,255,0.3); }
-        .form-control:focus {
-            outline: none;
-            border-color: rgba(227, 6, 19, 0.7);
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            box-shadow: none;
-        }
-
-        .btn-signup {
-            background: #e30613;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 0.65rem;
-            font-size: 1rem;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            margin-top: 0.5rem;
-            transition: background 0.2s;
-        }
-
-        .btn-signup:hover { background: #c0040f; }
-        .btn-signup:disabled { 
-            background: #888;
-            cursor: not-allowed;
-        }
-
-        .footer-link {
-            text-align: right;
-            margin-top: 0.4rem;
-        }
-
-        .footer-link a {
-            color: #e30613;
-            font-size: 0.82rem;
-            text-decoration: none;
-        }
-
-        .footer-link a:hover { text-decoration: underline; }
-
-        .bottom-text {
-            text-align: center;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.82rem;
-            margin-top: 1.5rem;
-        }
-
-        .bottom-text a {
-            color: rgba(255,255,255,0.75);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .bottom-text a:hover { color: #fff; }
-
-        .error-msg, .success-msg {
-            font-size: 0.82rem;
-            margin-bottom: 1rem;
-            border-radius: 6px;
-            padding: 0.5rem 0.8rem;
+            padding: 12px 14px;
+            font-size: 14px;
+            line-height: 20px;
         }
 
         .error-msg {
-            color: #ff6b6b;
-            background: rgba(227, 6, 19, 0.1);
-            border: 1px solid rgba(227, 6, 19, 0.25);
-            display: none;
+            border: 1px solid rgba(211, 2, 2, 0.2);
+            background: rgba(211, 2, 2, 0.08);
+            color: #a1001b;
         }
 
         .success-msg {
-            color: #51cf66;
-            background: rgba(81, 207, 102, 0.1);
-            border: 1px solid rgba(81, 207, 102, 0.25);
-            display: none;
+            border: 1px solid rgba(20, 115, 51, 0.2);
+            background: rgba(20, 115, 51, 0.08);
+            color: #0a6e30;
+        }
+
+        .form-area {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .label {
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .signup-type-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .signup-type-btn {
+            border: 0;
+            background: var(--surface);
+            border-radius: 46px;
+            height: 33px;
+            padding: 4px 12px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 21px;
+            font-family: "Noto Sans", Tahoma, Arial, sans-serif;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        .signup-type-btn.active {
+            background: #e8e8ec;
+        }
+
+        .input-wrap {
+            background: var(--surface);
+            border: 1px solid transparent;
+            border-radius: 4px;
+            padding: 10px 14px;
+        }
+
+        .input-wrap:focus-within {
+            border-color: #d30248;
+            background: #ffffff;
+        }
+
+        .input-wrap input {
+            width: 100%;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.25px;
+            font-family: Tahoma, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        }
+
+        .input-wrap input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .signup-button {
+            width: 100%;
+            border: 0;
+            border-radius: 12px;
+            background: var(--gradient);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            cursor: pointer;
+            min-height: 48px;
+        }
+
+        .signup-button:disabled {
+            opacity: 0.68;
+            cursor: not-allowed;
+        }
+
+        .btn-label-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .btn-arrow {
+            width: 24px;
+            height: 24px;
+            display: block;
         }
 
         .loading-spinner {
             display: none;
             width: 16px;
             height: 16px;
-            border: 2px solid #fff;
+            border: 2px solid #ffffff;
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin-left: 8px;
+        }
+
+        .bottom-row {
+            margin-top: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .login-link {
+            color: #d34802;
+            text-decoration: none;
+            letter-spacing: -0.25px;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        body.auth-modal-open {
+            overflow: hidden;
+        }
+
+        .auth-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 140;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(5px);
+        }
+
+        .auth-modal-overlay.open {
+            display: flex;
+        }
+
+        .auth-modal-card {
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+            padding: 22px 20px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .auth-close-btn {
+            align-self: flex-start;
+            width: 32px;
+            height: 32px;
+            margin: 0 0 6px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: #141519;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .auth-close-btn:hover {
+            opacity: 0.72;
+        }
+
+        .auth-close-btn:focus-visible {
+            outline: 2px solid #d30248;
+            outline-offset: 2px;
+        }
+
+        .auth-close-btn svg {
+            width: 22px;
+            height: 22px;
+            display: block;
+        }
+
+        .auth-title {
+            margin: 0;
+            font-size: 31px;
+            font-weight: 400;
+            line-height: 38px;
+            letter-spacing: -0.4px;
+            color: #141519;
+        }
+
+        .auth-subtitle {
+            margin-top: 4px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            line-height: 18px;
+            color: #4f5563;
+            max-width: 315px;
+        }
+
+        .auth-field {
+            margin-bottom: 8px;
+        }
+
+        .auth-label {
+            font-size: 13px;
+            line-height: 18px;
+            margin-bottom: 4px;
+            color: #242933;
+            display: block;
+        }
+
+        .auth-input-wrap {
+            background: #f2f2f4;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auth-input-wrap:focus-within {
+            border-color: #d30248;
+            background: #ffffff;
+        }
+
+        .auth-input-wrap input {
+            appearance: none;
+            border: none;
+            outline: none;
+            background: transparent;
+            width: 100%;
+            font-size: 13px;
+            line-height: 18px;
+            color: #141519;
+            font-family: Tahoma, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        }
+
+        .auth-input-wrap input::placeholder {
+            color: #81889a;
+        }
+
+        .auth-toggle-visibility {
+            border: none;
+            background: transparent;
+            color: #8a91a2;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .auth-toggle-visibility svg {
+            width: 16px;
+            height: 16px;
+            display: block;
+        }
+
+        .auth-forgot-row {
+            margin-top: 2px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .auth-forgot-row a {
+            text-decoration: none;
+            color: #5b6272;
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .auth-forgot-row a:hover {
+            text-decoration: underline;
+        }
+
+        .auth-btn {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 11px;
+            color: #ffffff;
+            background: linear-gradient(59.305786deg, #000000 1.2128%, #d30248 42.838%, #d30202 84.464%, #d34802 105.28%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 18px;
+            min-height: 34px;
+        }
+
+        .auth-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .auth-btn-label-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .auth-btn-arrow {
+            width: 14px;
+            height: 14px;
+        }
+
+        .auth-loading-spinner {
+            display: none;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .auth-error-msg,
+        .auth-success-msg {
+            display: none;
+            border-radius: 8px;
+            padding: 9px 11px;
+            margin-bottom: 10px;
+            font-size: 12px;
+            line-height: 17px;
+        }
+
+        .auth-error-msg {
+            color: #b00020;
+            border: 1px solid rgba(211, 2, 2, 0.25);
+            background: rgba(211, 2, 2, 0.08);
+        }
+
+        .auth-success-msg {
+            color: #137333;
+            border: 1px solid rgba(19, 115, 51, 0.2);
+            background: rgba(19, 115, 51, 0.08);
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 1199px) {
+            .left-visual {
+                display: none;
+            }
+
+            .right-panel {
+                width: 100%;
+                background: linear-gradient(180deg, #d9b1bf 0%, #e6c8d2 18%, #f2f2f4 42%, #f2f2f4 100%);
+                height: 100vh;
+                padding: 14px 12px;
+            }
+
+            .signup-content {
+                max-width: 540px;
+                gap: 12px;
+            }
+
+            .title { font-size: 32px; line-height: 40px; }
+            .brand-logo { margin-top: 0; }
+        }
+
+        @media (max-width: 767px) {
+            .title { font-size: 32px; }
+            .input-wrap input { font-size: 16px; }
+
+            .header-row {
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .auth-modal-overlay {
+                padding: 14px;
+            }
+
+            .auth-modal-card {
+                padding: 18px 14px 16px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="auth-card">
-        <img src="{% static 'images/logo.png' %}" alt="BAF Logo" style="height: 48px; width: auto; margin-bottom: 1.5rem; display: block;">
-        <h2>Set up your credentials</h2>
-        <p class="subtitle">Please choose a username and a password for your Alfa account</p>
+    <main class="signup-layout">
+        <section class="left-visual" aria-hidden="true"></section>
 
-        <div id="errorMsg" class="error-msg"></div>
-        <div id="successMsg" class="success-msg"></div>
+        <section class="right-panel">
+            <div class="signup-content">
+                <div class="top-area">
+                    <div class="header-row">
+                        <div class="title-wrap">
+                            <a class="back-button" href="{% url 'homepage' %}" aria-label="Go back">
+                                <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                                    <path d="M12.76 7.90667L4.66667 16L12.76 24.0933" stroke="#141519" stroke-width="2.13333" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M27.3333 16H4.89333" stroke="#141519" stroke-width="2.13333" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <h1 class="title">Sign Up</h1>
+                        </div>
 
-        <form id="signupForm">
-            <label class="form-label">Full Name</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="Enter Full Name" required>
+                        <img
+                            class="brand-logo"
+                            src="/static/images/logo.svg"
+                            alt="Alfa Mortgage"
+                        >
+                    </div>
 
-            <label class="form-label">Email</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required>
+                    <p class="subtitle">Enter your registered email or phone number and password to continue.</p>
+                </div>
 
-            <label class="form-label">Password</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" minlength="6" required>
+                <div class="messages">
+                    <div id="errorMsg" class="error-msg"></div>
+                    <div id="successMsg" class="success-msg"></div>
+                </div>
 
-            <label class="form-label">Confirm Password</label>
-            <input type="password" id="confirmPassword" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+                <form id="signupForm" class="form-area" novalidate>
+                    <input type="hidden" id="signupAccountType" name="account_type" value="individual">
 
-            <button type="submit" id="signupBtn" class="btn-signup">
-                <span id="signupBtnText">Sign up</span>
-                <span class="loading-spinner" id="loadingSpinner"></span>
+                    <div class="form-fields">
+                        <div class="field">
+                            <p class="label">Signup As*</p>
+                            <div class="signup-type-buttons" role="tablist" aria-label="Signup role">
+                                <button type="button" class="signup-type-btn active" data-type="individual" role="tab" aria-selected="true">Individual</button>
+                                <button type="button" class="signup-type-btn" data-type="real_estate_agent" role="tab" aria-selected="false">Real Estate Agent</button>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="firstName">First Name *</label>
+                            <div class="input-wrap">
+                                <input type="text" id="firstName" name="first_name" placeholder="ie. Ali Mujtaba" autocomplete="given-name" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="lastName">Last Name *</label>
+                            <div class="input-wrap">
+                                <input type="text" id="lastName" name="last_name" placeholder="ie. Memon" autocomplete="family-name" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="cnic">CNIC No.*</label>
+                            <div class="input-wrap">
+                                <input type="text" id="cnic" name="cnic" inputmode="numeric" autocomplete="off" placeholder="42201-6660687-9" maxlength="15" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="email">Email Address *</label>
+                            <div class="input-wrap">
+                                <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="signupBtn" class="signup-button">
+                        <span class="btn-label-wrap">
+                            <span id="signupBtnText">Continue</span>
+                            <span class="loading-spinner" id="loadingSpinner" aria-hidden="true"></span>
+                        </span>
+                        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M5 12H19" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13 6L19 12L13 18" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </form>
+
+                <div class="bottom-row">
+                    <span>Already have an account?</span>
+                    <a class="login-link" href="#" data-open-auth-modal>Login</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="authModalOverlay" class="auth-modal-overlay" aria-hidden="true">
+        <div class="auth-modal-card" role="dialog" aria-modal="true" aria-label="Login dialog">
+            <button class="auth-close-btn" type="button" id="authModalCloseBtn" aria-label="Go back">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 12H9" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </button>
-        </form>
-        
-        <div class="bottom-text">
-            Already have an account?
-            <a href="{% url 'login' %}">Log in</a>
+
+            <div id="authErrorMsg" class="auth-error-msg"></div>
+            <div id="authSuccessMsg" class="auth-success-msg"></div>
+
+            <div>
+                <h2 class="auth-title">Log in to your account</h2>
+                <p class="auth-subtitle">Enter your registered email or phone number and password to continue.</p>
+
+                <form id="authLoginFormElement">
+                    <div class="auth-field">
+                        <label class="auth-label" for="authLoginEmail">Email *</label>
+                        <div class="auth-input-wrap">
+                            <input type="email" id="authLoginEmail" name="email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-label" for="authLoginPassword">Password *</label>
+                        <div class="auth-input-wrap">
+                            <input type="password" id="authLoginPassword" name="password" placeholder="Enter your password" required>
+                            <button type="button" class="auth-toggle-visibility" id="toggleAuthLoginPassword" aria-label="Toggle password visibility">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M3 12C4.7 8.8 7.9 6.8 12 6.8C16.1 6.8 19.3 8.8 21 12C19.3 15.2 16.1 17.2 12 17.2C7.9 17.2 4.7 15.2 3 12Z" stroke="currentColor" stroke-width="1.4"/>
+                                    <circle cx="12" cy="12" r="2.6" stroke="currentColor" stroke-width="1.4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="auth-forgot-row">
+                        <a href="forgot-password/">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="auth-btn" id="authLoginBtn">
+                        <span class="auth-btn-label-wrap">
+                            <span id="authLoginBtnText">Login</span>
+                            <span class="auth-loading-spinner" id="authLoginSpinner"></span>
+                        </span>
+                        <svg class="auth-btn-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M5 12H19" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13 6L19 12L13 18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        // Firebase configuration
-        {% comment %} const firebaseConfig = {
-            apiKey: "AIzaSyBHyR1aY4exeVV8eb3tXxbOJBkzAc5lqyg",
-            authDomain: "alfamortgage-e0375.firebaseapp.com",
-            projectId: "alfamortgage-e0375",
-            storageBucket: "alfamortgage-e0375.firebasestorage.app",
-            messagingSenderId: "343934904869",
-            appId: "1:343934904869:web:da36cc8fceb292f59bedcc",
-            measurementId: "G-E4ZXM52SWB"
-        }; {% endcomment %}
         const firebaseConfig = {
             apiKey: "AIzaSyBbUovNi69LVu9IkmS1X8mfJQpAKXukIUE",
             authDomain: "alfa-mortgage.firebaseapp.com",
@@ -415,118 +747,206 @@
             messagingSenderId: "529818641633",
             appId: "1:529818641633:web:fda65ff39acf954fe843a0",
             measurementId: "G-HS510VBJV7"
-            };
+        };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // Get form elements
-        const signupForm = document.getElementById('signupForm');
-        const errorMsg = document.getElementById('errorMsg');
-        const successMsg = document.getElementById('successMsg');
-        const signupBtn = document.getElementById('signupBtn');
-        const signupBtnText = document.getElementById('signupBtnText');
-        const loadingSpinner = document.getElementById('loadingSpinner');
+        const signupForm = document.getElementById("signupForm");
+        const errorMsg = document.getElementById("errorMsg");
+        const successMsg = document.getElementById("successMsg");
+        const signupBtn = document.getElementById("signupBtn");
+        const signupBtnText = document.getElementById("signupBtnText");
+        const loadingSpinner = document.getElementById("loadingSpinner");
+        const signupAccountType = document.getElementById("signupAccountType");
+        const signupTypeButtons = document.querySelectorAll(".signup-type-btn");
+        const authOverlay = document.getElementById("authModalOverlay");
+        const authModalCloseBtn = document.getElementById("authModalCloseBtn");
+        const authOpenTriggers = document.querySelectorAll("[data-open-auth-modal]");
+        const authErrorMsg = document.getElementById("authErrorMsg");
+        const authSuccessMsg = document.getElementById("authSuccessMsg");
+        const authLoginFormElement = document.getElementById("authLoginFormElement");
+        const authLoginBtn = document.getElementById("authLoginBtn");
+        const authLoginBtnText = document.getElementById("authLoginBtnText");
+        const authLoginSpinner = document.getElementById("authLoginSpinner");
 
-        // Handle form submission
-        signupForm.addEventListener('submit', async (e) => {
+        const clearAuthMessages = () => {
+            authErrorMsg.style.display = "none";
+            authSuccessMsg.style.display = "none";
+            authErrorMsg.textContent = "";
+            authSuccessMsg.textContent = "";
+        };
+
+        const openAuthModal = () => {
+            clearAuthMessages();
+            authOverlay.classList.add("open");
+            authOverlay.setAttribute("aria-hidden", "false");
+            document.body.classList.add("auth-modal-open");
+        };
+
+        const closeAuthModal = () => {
+            authOverlay.classList.remove("open");
+            authOverlay.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("auth-modal-open");
+        };
+
+        authOpenTriggers.forEach((trigger) => {
+            trigger.addEventListener("click", (event) => {
+                event.preventDefault();
+                openAuthModal();
+            });
+        });
+
+        authModalCloseBtn.addEventListener("click", closeAuthModal);
+
+        authOverlay.addEventListener("click", (event) => {
+            if (event.target === authOverlay) {
+                closeAuthModal();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && authOverlay.classList.contains("open")) {
+                closeAuthModal();
+            }
+        });
+
+        document.getElementById("toggleAuthLoginPassword")?.addEventListener("click", () => {
+            const input = document.getElementById("authLoginPassword");
+            input.type = input.type === "password" ? "text" : "password";
+        });
+
+        authLoginFormElement.addEventListener("submit", async (e) => {
             e.preventDefault();
+            clearAuthMessages();
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
+            const email = document.getElementById("authLoginEmail").value.trim();
+            const password = document.getElementById("authLoginPassword").value;
 
-            // Hide previous messages
-            errorMsg.style.display = 'none';
-            successMsg.style.display = 'none';
-
-            // Validate passwords match
-            if (password !== confirmPassword) {
-                errorMsg.textContent = 'Passwords do not match';
-                errorMsg.style.display = 'block';
-                return;
-            }
-
-            // Validate password length
-            if (password.length < 6) {
-                errorMsg.textContent = 'Password must be at least 6 characters';
-                errorMsg.style.display = 'block';
-                return;
-            }
-
-            // Show loading state
-            signupBtn.disabled = true;
-            signupBtnText.textContent = 'Creating account...';
-            loadingSpinner.style.display = 'inline-block';
+            authLoginBtn.disabled = true;
+            authLoginBtnText.textContent = "Logging in...";
+            authLoginSpinner.style.display = "inline-block";
 
             try {
-                // Create user with Firebase
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
-
-                // Update user profile with name
-                await updateProfile(user, {
-                    displayName: name
-                });
-
-                // Get Firebase ID token
                 const idToken = await user.getIdToken();
 
-                // Send token to Django backend
-                const response = await fetch('{% url "firebase_signup" %}', {
-                    method: 'POST',
+                const response = await fetch('{% url "firebase_login" %}', {
+                    method: "POST",
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
                         idToken: idToken,
-                        email: email,
-                        name: name
+                        email: email
                     })
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
-                    successMsg.textContent = 'Account created successfully! Redirecting...';
-                    successMsg.style.display = 'block';
-
-                    // Redirect after a short delay
+                    authSuccessMsg.textContent = "Login successful. Redirecting...";
+                    authSuccessMsg.style.display = "block";
                     setTimeout(() => {
                         window.location.href = data.redirect_url;
-                    }, 1000);
+                    }, 500);
                 } else {
-                    throw new Error(data.error || 'Signup failed');
+                    throw new Error(data.error || "Login failed");
                 }
-
             } catch (error) {
-                console.error('Signup error:', error);
-                
-                // Show user-friendly error messages
-                let errorMessage = 'Signup failed. Please try again.';
-                
-                if (error.code === 'auth/email-already-in-use') {
-                    errorMessage = 'An account with this email already exists.';
-                } else if (error.code === 'auth/invalid-email') {
-                    errorMessage = 'Invalid email address.';
-                } else if (error.code === 'auth/weak-password') {
-                    errorMessage = 'Password is too weak. Please use a stronger password.';
-                } else if (error.code === 'auth/network-request-failed') {
-                    errorMessage = 'Network error. Please check your connection.';
+                let errorMessage = "Login failed. Please try again.";
+
+                if (error.code === "auth/invalid-credential" || error.code === "auth/wrong-password") {
+                    errorMessage = "Invalid email or password.";
+                } else if (error.code === "auth/user-not-found") {
+                    errorMessage = "No account found with this email.";
+                } else if (error.code === "auth/too-many-requests") {
+                    errorMessage = "Too many failed attempts. Please try again later.";
+                } else if (error.code === "auth/network-request-failed") {
+                    errorMessage = "Network error. Please check your connection.";
                 } else if (error.message) {
                     errorMessage = error.message;
                 }
 
-                errorMsg.textContent = errorMessage;
-                errorMsg.style.display = 'block';
-
-                // Reset button state
-                signupBtn.disabled = false;
-                signupBtnText.textContent = 'Sign up';
-                loadingSpinner.style.display = 'none';
+                authErrorMsg.textContent = errorMessage;
+                authErrorMsg.style.display = "block";
+                authLoginBtn.disabled = false;
+                authLoginBtnText.textContent = "Login";
+                authLoginSpinner.style.display = "none";
             }
+        });
+
+        signupTypeButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const selectedType = button.dataset.type;
+                signupAccountType.value = selectedType;
+
+                signupTypeButtons.forEach((btn) => {
+                    const isActive = btn === button;
+                    btn.classList.toggle("active", isActive);
+                    btn.setAttribute("aria-selected", isActive ? "true" : "false");
+                });
+            });
+        });
+
+        const formatCnicDigits = (digits) => {
+            const d = digits.replace(/\D/g, "").slice(0, 13);
+            if (d.length <= 5) return d;
+            if (d.length <= 12) return `${d.slice(0, 5)}-${d.slice(5)}`;
+            return `${d.slice(0, 5)}-${d.slice(5, 12)}-${d.slice(12)}`;
+        };
+
+        const cnicInput = document.getElementById("cnic");
+        cnicInput.addEventListener("input", () => {
+            const formatted = formatCnicDigits(cnicInput.value);
+            cnicInput.value = formatted;
+        });
+
+        const showError = (message) => {
+            successMsg.style.display = "none";
+            errorMsg.textContent = message;
+            errorMsg.style.display = "block";
+        };
+
+        const hideMessages = () => {
+            errorMsg.style.display = "none";
+            successMsg.style.display = "none";
+        };
+
+        signupForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const cnicRaw = document.getElementById("cnic").value.trim();
+            const cnicDigits = cnicRaw.replace(/\D/g, "");
+            const email = document.getElementById("email").value.trim();
+            const accountType = signupAccountType.value;
+
+            if (!firstName || !lastName) {
+                showError("First name and last name are required.");
+                return;
+            }
+
+            if (!/^\d{13}$/.test(cnicDigits)) {
+                showError("Enter a valid 13-digit CNIC number.");
+                return;
+            }
+
+            const cnicFormatted = formatCnicDigits(cnicDigits);
+
+            sessionStorage.setItem("signupDraft", JSON.stringify({
+                firstName,
+                lastName,
+                cnic: cnicFormatted,
+                cnicDigits,
+                email,
+                accountType
+            }));
+
+            window.location.href = '{% url "signup_continue" %}';
         });
     </script>
 </body>

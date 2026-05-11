@@ -458,8 +458,9 @@ def auth_page(request, property_id):
 
 # LOGOUT
 def logout_view(request):
+    request.session.pop("firebase_uid", None)
     logout(request)
-    return redirect('homepage')
+    return redirect("homepage")
 
 
 # Redirect after login
@@ -493,6 +494,16 @@ def signup_page(request):
     if request.user.is_authenticated:
         return redirect('homepage')
     return render(request, 'home/signup.html')
+
+
+def signup_continue_page(request):
+    return render(request, 'home/signup_continue.html')
+
+
+def signup_create_password_page(request):
+    if request.user.is_authenticated:
+        return redirect('homepage')
+    return render(request, 'home/signup_create_password.html')
 
 @csrf_exempt
 def firebase_signup(request):

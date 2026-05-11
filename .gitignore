@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+mortgage_alpha\venv
+venv/
+env/
+ENV/
+serviceAccountKey.json
+# Django stuff
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+mortgage_alpha\serviceAccountKey.json
+
+# Static files (if you collect them)
+staticfiles/
+
+# Environment variables
+.env
+.env.*
+
+# VS Code / IDE
+.vscode/
+.idea/
+mortgage_alpha\serviceAccountKey.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Migrations (optional — keep if you want version control on DB schema)
+# **/migrations/*
+# !**/migrations/__init__.py
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Coverage / testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Logs
+*.log
+
+# Node (if you ever add frontend)
+node_modules/

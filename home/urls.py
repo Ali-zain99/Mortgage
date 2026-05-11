@@ -34,8 +34,10 @@ urlpatterns = [
     
     # Auth Pages
     path('auth/', views.auth_unified, name='auth_unified'),
-    path('login/', views.auth_unified, name='login'),  # Redirects to unified auth
-    path('signup/', views.auth_unified, name='signup'),  # Redirects to unified auth
+    path('login/', views.login_page, name='login'),
+    path('signup/', views.signup_page, name='signup'),
+    path('signup/continue/', views.signup_continue_page, name='signup_continue'),
+    path('signup/create-password/', views.signup_create_password_page, name='signup_create_password'),
     path('mortgage-calculator/', views.mortgage_calculator, name='mortgage_calculator'),
     path('calculate-mortgage/', views.calculate_mortgage, name='calculate_mortgage'),
     # Firebase Authentication Endpoints
